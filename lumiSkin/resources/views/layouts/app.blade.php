@@ -1,59 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
-    <title>@yield('title', 'Online Store')</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <title>@yield('title', 'LumiSkin')</title>
 </head>
 
 <body>
-
-    <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Online Store</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">LumiSkin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link active" href="#">About</a>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link cart-icon" href="#">
+                            🛒 <span class="cart-badge">10</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+    <!-- Navbar -->
 
-    <header class="masthead bg-primary text-white text-center py-4">
-        <div class="container d-flex align-items-center flex-column">
-            <h2>@yield('subtitle', 'A Laravel EAFIT App')</h2>
-        </div>
-    </header>
-    <!-- header -->
-
-    <div class="container my-4">
+    <div class="container my-5" style="padding-top: 80px;">
         @yield('content')
     </div>
 
-    <!-- footer -->
-    <div class="copyright py-4 text-center text-white">
+    <!-- Footer -->
+    <footer class="footer text-center">
         <div class="container">
-            <small>
-                Copyright - <a class="text-reset fw-bold text-decoration-none" target="_blank"
-                    href="https://twitter.com/danielgarax">
-                    Daniel Correa
-                </a>
-            </small>
+            <p>© 2025 LumiSkin - All rights reserved.</p>
+            <a href="#">Terms and Conditions</a> | <a href="#">Privacy Policy</a>
+            <div class="mt-2">
+                <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">TikTok</a>
+            </div>
         </div>
-    </div>
-    <!-- footer -->
+    </footer>
+    <!-- Footer -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
