@@ -2,8 +2,8 @@
 
 ## Requirements
 
-1. Have XAMPP Control Panel installed in your computer.
-2. Have Composer installed in your computer.
+1. Have [XAMPP](https://www.apachefriends.org/) installed in your computer.
+2. Have [Composer](https://getcomposer.org/download/) installed in your computer.
 
 ## Installation
 - Clone the repository to your local machine.
