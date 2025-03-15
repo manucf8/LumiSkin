@@ -1,0 +1,173 @@
+/* General Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #86c5da;
+    padding: 15px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #edceb5;
+    font-size: 1.8rem;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #edceb5 !important;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #edceb5;
+    color: #000;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, #b0d8e8, #86c5da);
+    border-radius: 15px;
+    padding: 80px;
+    text-align: center;
+    color: #fff;
+}
+.hero h1 {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+.hero .btn-primary {
+    background-color: #86c5da;
+    border-color: #86c5da;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+.hero .btn-primary:hover {
+    background-color: #5faacb;
+    border-color: #5faacb;
+}
+
+/* Categories Section */
+.card {
+    border-radius: 10px;
+    background-color: #c1e1ee;
+    padding: 25px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+.card h4 {
+    font-size: 1.5rem;
+    color: #333;
+}
+.card p {
+    color: #555;
+}
+
+/* Ensure Equal Heights for Cards */
+.row .col-md-4 {
+    display: flex;
+}
+.row .col-md-4 .card {
+    flex-grow: 1;
+}
+
+/* Skincare Test Section */
+.test-skincare {
+    background: linear-gradient(to right, #edceb5, #86c5da);
+    border-radius: 15px;
+    padding: 60px;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+}
+.test-skincare h2 {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.test-skincare p {
+    color: #f8f9fa;
+}
+.test-skincare .btn-light {
+    background-color: white;
+    color: #edceb5;
+    border: 1px solid #edceb5;
+    padding: 12px 20px;
+    font-size: 1rem;
+}
+.test-skincare .btn-light:hover {
+    background-color: #f5d3b1;
+    color: white;
+}
+
+/* Best Sellers */
+.card img {
+    border-radius: 10px;
+}
+.btn-outline-primary {
+    border-color: #5faacb;
+    background-color: #5faacb;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+.btn-outline-primary:hover {
+    background-color: #3d8abf;
+    border-color: #3d8abf;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: #d5e7f1;
+    padding: 30px 0;
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+}
+.footer a {
+    color: #000;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+.footer a:hover {
+    color: #86c5da;
+}
