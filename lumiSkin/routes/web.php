@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
+Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
+    Route::get('/', 'index')->name('home.index');
+});
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {
     Route::get('/categories', 'index')->name('category.index');

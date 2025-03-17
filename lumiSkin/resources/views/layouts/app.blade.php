@@ -21,6 +21,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
