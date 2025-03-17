@@ -4,11 +4,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request)
+    public function addToCart(Request $request): RedirectResponse
     {
         $product = Product::findOrFail($request->id);
         $cart = session()->get('cart', []);
@@ -25,7 +26,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function removeFromCart($id)
+    public function removeFromCart(int $id): RedirectResponse
     {
         $cart = session()->get('cart', []);
 
@@ -37,7 +38,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function clearCart()
+    public function clearCart(): RedirectResponse
     {
         session()->forget('cart');
         return back();
