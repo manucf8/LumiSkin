@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
 
 class Product extends Model
 {
@@ -19,10 +20,12 @@ class Product extends Model
      * $this->attributes['image'] - string - contains the product image
      * $this->attributes['brand'] - string - contains the product brand
      * $this->attributes['price'] - int - contains the product price
+     * $this->attributes['created_at'] - timestamp - contains the product creation date
+     * $this->attributes['updated_at'] - timestamp - contains the product update date
      *   $this->categories - Category[] - contains the associated categories
-     *   $this->wishLists - WishList[] - contains the associated wish List
+     *   $this->wishLists - WishList[] - contains the associated wish List 'FALTA'
      *   $this->items - Item[] - contains the associated item
-     *   $this->skincareTests - SkincareTest[] - contains the associated Skincare Test
+     *   $this->skincareTests - SkincareTest[] - contains the associated Skincare Test 'FALTA'
      */
 
     protected $fillable = ['name', 'description', 'image', 'brand', 'price'];
@@ -32,7 +35,7 @@ class Product extends Model
         $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'required|max:255',
-            'image' => 'mimes:jpg,jepg,png',
+            'image' => 'image|mimes:jpg,jepg,png',
             'brand' => 'required|max:100',
             'price' => 'required|min:1',
         ]);
@@ -83,6 +86,16 @@ class Product extends Model
         $this->attributes['price'] = $price;
     }
 
+    public function getCreatedAt(): Carbon
+    {
+        return Carbon::parse($this->attributes['created_at']);
+    }
+
+    public function getUpdatedAt(): Carbon
+    {
+        return Carbon::parse($this->attributes['updated_at']);
+    }
+
     // Relationship wish List
     public function getWishLists(): Collection
     {
@@ -126,10 +139,10 @@ class Product extends Model
         $this->items = $items;
     }
 
-    // public function items(): HasMany
-    // {
-    //     return $this->hasMany(Item::class);
-    // }
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
 
     // Relationship skincare test
     public function getSkincareTests(): Collection
