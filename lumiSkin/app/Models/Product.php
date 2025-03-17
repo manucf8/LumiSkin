@@ -102,11 +102,6 @@ class Product extends Model
         return $this->wishLists;
     }
 
-    public function setWishLists(Collection $wishLists): void
-    {
-        $this->wishLists = $wishLists;
-    }
-
     // public function wishLists(): HasMany
     // {
     //     return $this->hasMany(WishList::class);
@@ -116,11 +111,6 @@ class Product extends Model
     public function getCategories(): Collection
     {
         return $this->categories;
-    }
-
-    public function setCategories(Collection $categories): void
-    {
-        $this->categories = $categories;
     }
 
     public function categories(): HasMany
@@ -134,11 +124,6 @@ class Product extends Model
         return $this->items;
     }
 
-    public function setItems(Collection $items): void
-    {
-        $this->items = $items;
-    }
-
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
@@ -148,11 +133,6 @@ class Product extends Model
     public function getSkincareTests(): Collection
     {
         return $this->skincareTests;
-    }
-
-    public function setSkincareTests(Collection $skincareTests): void
-    {
-        $this->skincareTests = $skincareTests;
     }
 
     // public function skincareTests(): HasMany
