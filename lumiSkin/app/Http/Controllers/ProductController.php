@@ -18,8 +18,8 @@ class ProductController extends Controller
         }
 
         $viewData = [];
-        $viewData['title'] = 'Lista de Productos';
-        $viewData['subtitle'] = 'Explora nuestra colección';
+        $viewData['title'] = 'List of Products';
+        $viewData['subtitle'] = 'Discover our collection';
         $viewData['products'] = $query->get();
 
         return view('product.index')->with('viewData', $viewData);

@@ -10,7 +10,7 @@
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Search products..."
                 value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+            <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
 
@@ -28,7 +28,7 @@
                     <form method="POST" action="{{ route('cart.add') }}" class="mt-auto">
                         @csrf
                         <input type="hidden" name="id" value="{{ $product->id }}">
-                        <button type="submit" class="btn btn-primary w-100">🛒 Añadir al carrito</button>
+                        <button type="submit" class="btn btn-primary w-100">🛒 Add to Cart</button>
                     </form>
                 </div>
             </div>
@@ -36,7 +36,7 @@
         @endforeach
         @else
         <div class="col-12 text-center">
-            <p class="text-muted">No se encontraron productos.</p>
+            <p class="text-muted">No products found.</p>
         </div>
         @endif
     </div>
