@@ -6,6 +6,10 @@ Route::controller(App\Http\Controllers\HomeController::class)->group(function ()
     Route::get('/', 'index')->name('home.index');
 });
 
+Route::controller(App\Http\Controllers\ProductController::class)->group(function (): void {
+    Route::get('/products', 'index')->name('product.index');
+});
+
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {
     Route::get('/categories', 'index')->name('category.index');
     Route::get('/categories/create', 'create')->name('category.create');
