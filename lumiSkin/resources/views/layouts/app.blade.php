@@ -49,53 +49,42 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm border-0 rounded">
                     <div>
                         <strong class="text-dark">{{ $item['name'] }}</strong><br>
-                        <small class="text-muted">${{ $item['price'] }}</small>
+                        <small class="text-muted">${{ $item['price']}}</small>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <!-- Decrease Button -->
-                        <form method="POST" action="{{ route('cart.decrease') }}">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $id }}">
-                            <button class="btn btn-outline-secondary btn-sm px-2">-</button>
-                        </form>
 
-                        <span class="mx-2">{{ $item['quantity'] }}</span>
-
-                        <!-- Increase Button -->
-                        <form method="POST" action="{{ route('cart.add') }}">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $id }}">
-                            <button class="btn btn-outline-secondary btn-sm px-2">+</button>
-                        </form>
-
-                        <!-- Remove Button -->
-                        <form method="POST" action="{{ route('cart.remove', ['id' => $id]) }}">
-                            @csrf
-                            <button class="btn btn-outline-danger btn-sm ms-2">X</button>
-                        </form>
-                    </div>
+                    <!-- Remove Button -->
+                    <form method="POST" action="{{ route('cart.remove', ['id' => $id]) }}" class="cart-form">
+                        @csrf
+                        <button class="btn btn-outline-danger btn-sm ms-2">X</button>
+                    </form>
                 </li>
                 @endforeach
             </ul>
 
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
-                <h5 class="fw-bold text-success">Total: ${{ array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], session('cart'))) }}</h5>
+                <h5 class="fw-bold text-success">Total: ${{ array_sum(array_map(fn($item) => $item['price'], session('cart'))) }}</h5>
             </div>
 
-            <!-- Clear Cart Button -->
-            <div class="mt-3">
-                <form method="POST" action="{{ route('cart.clear') }}">
+            <!-- Clear Cart and Checkout Buttons -->
+            <div class="mt-3 d-flex flex-column gap-2">
+                <!-- Checkout Button -->
+                <a href="#" class="btn btn-primary w-100 fw-bold">💳 Proceed to Checkout</a>
+
+                <!-- Clear Cart Button -->
+                <form method="POST" action="{{ route('cart.clear') }}" class="cart-form">
                     @csrf
                     <button class="btn btn-danger w-100 fw-bold">🗑️ Clear Cart</button>
                 </form>
             </div>
+
             @else
             <p class="text-center text-muted fs-5">Your cart is empty.</p>
             @endif
         </div>
     </div>
     <!-- End of Offcanvas -->
+
 
 
 

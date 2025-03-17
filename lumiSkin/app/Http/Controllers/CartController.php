@@ -13,30 +13,12 @@ class CartController extends Controller
         $product = Product::findOrFail($request->id);
         $cart = session()->get('cart', []);
 
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] += 1;
-        } else {
+        // Agregar el producto solo si no está en el carrito
+        if (!isset($cart[$product->id])) {
             $cart[$product->id] = [
                 'name' => $product->name,
                 'price' => $product->price,
-                'quantity' => 1,
             ];
-        }
-
-        session()->put('cart', $cart);
-        return back();
-    }
-
-    public function decreaseFromCart(Request $request)
-    {
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$request->id])) {
-            if ($cart[$request->id]['quantity'] > 1) {
-                $cart[$request->id]['quantity'] -= 1;
-            } else {
-                unset($cart[$request->id]);
-            }
         }
 
         session()->put('cart', $cart);
