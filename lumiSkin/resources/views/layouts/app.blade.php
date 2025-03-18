@@ -27,7 +27,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
                     <li class="nav-item">
                         <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                            🛒 <span class="cart-badge">{{ session('cart') ? collect(session('cart'))->sum('quantity')  : 0 }}</span>
+                            🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
                         </a>
                     </li>
                 </ul>
@@ -71,7 +71,7 @@
 
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
-                <h5 class="fw-bold text-success">Total: ${{ array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), session('cart'))) }}</h5>
+                <h5 class="fw-bold text-success">Total: ${{ session('cart_total', 0) }}</h5>
             </div>
 
             <!-- Clear Cart and Checkout Buttons -->
@@ -102,8 +102,6 @@
             });
         });
     </script>
-
-
 
     <div class="container my-5" style="padding-top: 80px;">
         @yield('content')
