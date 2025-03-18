@@ -27,7 +27,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
                     <li class="nav-item">
                         <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                            🛒 <span class="cart-badge">{{ session('cart') ? count(session('cart')) : 0 }}</span>
+                            🛒 <span class="cart-badge">{{ session('cart') ? collect(session('cart'))->sum('quantity')  : 0 }}</span>
                         </a>
                     </li>
                 </ul>
