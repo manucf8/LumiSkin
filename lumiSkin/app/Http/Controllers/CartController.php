@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,15 +13,29 @@ class CartController extends Controller
         $product = Product::findOrFail($request->id);
         $cart = session()->get('cart', []);
 
-        // Agregar el producto solo si no está en el carrito
         if (!isset($cart[$product->id])) {
             $cart[$product->id] = [
                 'name' => $product->name,
                 'price' => $product->price,
+                'quantity' => 1
             ];
+        } else {
+            $cart[$product->id]['quantity'] += 1; // Incrementa la cantidad si ya está en el carrito
         }
 
         session()->put('cart', $cart);
+        return back();
+    }
+
+    public function updateCart(Request $request, int $id): RedirectResponse
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = max(1, (int) $request->quantity); // Asegura que la cantidad sea al menos 1
+            session()->put('cart', $cart);
+        }
+
         return back();
     }
 

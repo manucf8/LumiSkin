@@ -12,6 +12,7 @@ Route::controller(App\Http\Controllers\ProductController::class)->group(function
 
 Route::controller(App\Http\Controllers\CartController::class)->group(function (): void {
     Route::post('/cart/add', 'addToCart')->name('cart.add');
+    Route::post('/cart/update/{id}', 'updateCart')->name('cart.update');
     Route::post('/cart/remove/{id}', 'removeFromCart')->name('cart.remove');
     Route::post('/cart/clear', 'clearCart')->name('cart.clear');
 });

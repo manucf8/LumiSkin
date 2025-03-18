@@ -49,8 +49,16 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm border-0 rounded">
                     <div>
                         <strong class="text-dark">{{ $item['name'] }}</strong><br>
-                        <small class="text-muted">${{ $item['price']}}</small>
+                        <small class="text-muted">${{ $item['price'] }}</small>
                     </div>
+
+                    <!-- Quantity Input -->
+                    <form method="POST" action="{{ route('cart.update', ['id' => $id]) }}" class="cart-update-form">
+                        @csrf
+                        <input type="number" name="quantity" value="{{ $item['quantity'] ?? 1 }}" min="1"
+                            class="form-control form-control-sm text-center w-50 update-quantity"
+                            data-id="{{ $id }}">
+                    </form>
 
                     <!-- Remove Button -->
                     <form method="POST" action="{{ route('cart.remove', ['id' => $id]) }}" class="cart-form">
@@ -63,7 +71,7 @@
 
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
-                <h5 class="fw-bold text-success">Total: ${{ array_sum(array_map(fn($item) => $item['price'], session('cart'))) }}</h5>
+                <h5 class="fw-bold text-success">Total: ${{ array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), session('cart'))) }}</h5>
             </div>
 
             <!-- Clear Cart and Checkout Buttons -->
@@ -85,6 +93,15 @@
     </div>
     <!-- End of Offcanvas -->
 
+    <!-- JavaScript para actualización automática de cantidad -->
+    <script>
+        document.querySelectorAll('.update-quantity').forEach(input => {
+            input.addEventListener('change', function() {
+                const form = this.closest('form');
+                form.submit();
+            });
+        });
+    </script>
 
 
 
