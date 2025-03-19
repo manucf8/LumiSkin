@@ -23,7 +23,6 @@ class Product extends Model
      * $this->attributes['created_at'] - timestamp - contains the product creation date
      * $this->attributes['updated_at'] - timestamp - contains the product update date
      *   $this->categories - Category[] - contains the associated categories
-     *   $this->wishLists - WishList[] - contains the associated wish List 'FALTA'
      *   $this->items - Item[] - contains the associated item
      *   $this->skincareTests - SkincareTest[] - contains the associated Skincare Test 'FALTA'
      */
@@ -95,17 +94,6 @@ class Product extends Model
     {
         return Carbon::parse($this->attributes['updated_at']);
     }
-
-    // Relationship wish List
-    public function getWishLists(): Collection
-    {
-        return $this->wishLists;
-    }
-
-    // public function wishLists(): HasMany
-    // {
-    //     return $this->hasMany(WishList::class);
-    // }
 
     // Relationship categories
     public function getCategories(): Collection
