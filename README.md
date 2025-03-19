@@ -21,6 +21,8 @@ DB_PASSWORD=your_database_password
 - Run `php artisan key:generate` to generate a new application key.
 
 ## Migrations
+- Open XAMPP Control Panel  and start the modules Apache and MySQL.
+- From there, click on MySQL admin or go to `http://localhost/phpmyadmin/`, and there, create a database with the same name that you defined in your .env (DB_DATABASE=your_database_name).
 - Before running the application, run this command `php artisan migrate` to apply migrations.
 
 ## Running the app
