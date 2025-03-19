@@ -24,8 +24,8 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-        session()->put('cart_total', $this->calculateTotal()); // Guardar total en sesión
-        session()->put('cart_quantity', $this->calculateTotalQuantity()); // Guardar cantidad en sesión
+        session()->put('cart_total', $this->calculateTotal());
+        session()->put('cart_quantity', $this->calculateTotalQuantity());
 
         return back();
     }
@@ -64,7 +64,7 @@ class CartController extends Controller
     {
         session()->forget('cart');
         session()->forget('cart_total');
-        session()->forget('cart_quantity'); // Limpiar cantidad también
+        session()->forget('cart_quantity');
 
         return back();
     }

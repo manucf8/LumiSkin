@@ -92,17 +92,6 @@
         </div>
     </div>
     <!-- End of Offcanvas -->
-
-    <!-- JavaScript para actualización automática de cantidad -->
-    <script>
-        document.querySelectorAll('.update-quantity').forEach(input => {
-            input.addEventListener('change', function() {
-                const form = this.closest('form');
-                form.submit();
-            });
-        });
-    </script>
-
     <div class="container my-5" style="padding-top: 80px;">
         @yield('content')
     </div>
@@ -120,6 +109,7 @@
     <!-- Footer -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
