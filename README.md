@@ -18,7 +18,7 @@ DB_DATABASE=your_database_name
 DB_USERNAME=your_database_username
 DB_PASSWORD=your_database_password
 ```
-- Run php artisan key:generate to generate a new application key.
+- Run `php artisan key:generate` to generate a new application key.
 
 ## Migrations
 - Before running the application, run this command `php artisan migrate` to apply migrations.
