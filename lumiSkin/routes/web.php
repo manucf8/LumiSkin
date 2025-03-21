@@ -25,3 +25,8 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
     Route::post('/categories/store', 'store')->name('category.store');
     Route::delete('/categories/{id}/delete', 'delete')->name('category.delete');
 });
+
+Route::controller(App\Http\Controllers\OrderController::class)->group(function (): void {
+    Route::post('/orders', 'store')->name('orders.store');
+    Route::get('/orders/{id}', 'index')->name('orders.index');
+});

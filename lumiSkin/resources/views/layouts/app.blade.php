@@ -76,8 +76,13 @@
 
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">
-                <!-- Checkout Button -->
-                <a href="#" class="btn btn-primary w-100 fw-bold">💳 Proceed to Checkout</a>
+                <!-- Proceed to Checkout Form -->
+                <form method="POST" action="{{ route('orders.store') }}" class="cart-form">
+                    @csrf
+                    <label for="delivery_date" class="fw-bold mb-1">Choose delivery date:</label>
+                    <input type="date" name="delivery_date" id="delivery_date" class="form-control mb-2" required min="{{ now()->addDay()->toDateString() }}">
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">🛒 Place Order</button>
+                </form>
 
                 <!-- Clear Cart Button -->
                 <form method="POST" action="{{ route('cart.clear') }}" class="cart-form">
@@ -85,6 +90,7 @@
                     <button class="btn btn-danger w-100 fw-bold">🗑️ Clear Cart</button>
                 </form>
             </div>
+
 
             @else
             <p class="text-center text-muted fs-5">Your cart is empty.</p>

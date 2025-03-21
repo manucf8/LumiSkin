@@ -23,12 +23,13 @@ class Order extends Model
      * $this->attributes['user_id'] - int - contains the user id
      * $this->items - Item[] - contains the associated items
      */
-    protected $fillable = ['total', 'delivery_date', 'user_id'];
+
+
+    protected $fillable = ['total', 'delivery_date'];
 
     public static function validate($request): void
     {
         $request->validate([
-            'total' => 'required|integer|min:1',
             'delivery_date' => 'required|date|after:today',
             // 'user_id' => 'required|exists:users,id'
         ]);

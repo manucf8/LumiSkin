@@ -47,39 +47,24 @@
 <!-- Best Sellers -->
 <div class="container mt-5">
     <h2 class="text-center">Best Sellers</h2>
-    <div class="row mt-4">
-        <div class="col-md-3 text-center">
-            <div class="card p-3">
-                <img src="#" class="card-img-top" alt="Product 1">
-                <h5 class="mt-2">Product 1</h5>
-                <p>$20.00</p>
-                <a href="#" class="btn btn-outline-primary">View More</a>
+    <div class="row">
+        @foreach ($viewData["topProducts"] as $product)
+        <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ asset('images/' . 'default.jpg') }}" class="card-img-top" alt="{{ $product['name'] }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center text-primary">{{ $product->getName() }}</h5>
+                    <p class="card-text text-muted text-center">{{ Str::limit($product->getDescription(), 60) }}</p>
+                    <p class="text-center text-success fw-bold">$ {{ $product->getPrice() }}</p>
+                    <form method="POST" action="{{ route('cart.add') }}" class="mt-auto">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <button type="submit" class="btn btn-primary w-100">🛒 Add to Cart</button>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 text-center">
-            <div class="card p-3">
-                <img src="#" class="card-img-top" alt="Product 2">
-                <h5 class="mt-2">Product 2</h5>
-                <p>$25.00</p>
-                <a href="#" class="btn btn-outline-primary">View More</a>
-            </div>
-        </div>
-        <div class="col-md-3 text-center">
-            <div class="card p-3">
-                <img src="#" class="card-img-top" alt="Product 3">
-                <h5 class="mt-2">Product 3</h5>
-                <p>$30.00</p>
-                <a href="#" class="btn btn-outline-primary">View More</a>
-            </div>
-        </div>
-        <div class="col-md-3 text-center">
-            <div class="card p-3">
-                <img src="#" class="card-img-top" alt="Product 4">
-                <h5 class="mt-2">Product 4</h5>
-                <p>$35.00</p>
-                <a href="#" class="btn btn-outline-primary">View More</a>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 @endsection

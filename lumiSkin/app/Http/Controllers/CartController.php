@@ -24,8 +24,8 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-        session()->put('cart_total', $this->calculateTotal());
-        session()->put('cart_quantity', $this->calculateTotalQuantity());
+        session()->put('cart_total', Product::calculateTotal());
+        session()->put('cart_quantity', Product::calculateTotalQuantity());
 
         return back();
     }
@@ -39,8 +39,8 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
 
-        session()->put('cart_total', $this->calculateTotal());
-        session()->put('cart_quantity', $this->calculateTotalQuantity());
+        session()->put('cart_total', Product::calculateTotal());
+        session()->put('cart_quantity', Product::calculateTotalQuantity());
 
         return back();
     }
@@ -54,8 +54,8 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
 
-        session()->put('cart_total', $this->calculateTotal());
-        session()->put('cart_quantity', $this->calculateTotalQuantity());
+        session()->put('cart_total', Product::calculateTotal());
+        session()->put('cart_quantity', Product::calculateTotalQuantity());
 
         return back();
     }
@@ -67,19 +67,5 @@ class CartController extends Controller
         session()->forget('cart_quantity');
 
         return back();
-    }
-
-    private function calculateTotal(): int
-    {
-        $cart = session('cart', []);
-
-        return array_sum(array_map(fn ($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
-    }
-
-    private function calculateTotalQuantity(): int
-    {
-        $cart = session('cart', []);
-
-        return array_sum(array_map(fn ($item) => $item['quantity'] ?? 1, $cart));
     }
 }
