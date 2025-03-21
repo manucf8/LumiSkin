@@ -128,5 +128,15 @@ class Product extends Model
     //     return $this->hasMany(SkincareTest::class);
     // }
 
+    public static function calculateTotal(): int
+    {
+        $cart = session('cart', []);
+        return array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
+    }
 
+    public static function calculateTotalQuantity(): int
+    {
+        $cart = session('cart', []);
+        return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
+    }
 }
