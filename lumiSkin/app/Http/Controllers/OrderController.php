@@ -2,36 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Item;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $cart = session('cart', []);
 
         if (empty($cart)) {
-            return redirect()->back()->with('error', 'El carrito está vacío');
+            return redirect()->back()->with('error', 'Cart is empty');
         }
 
-        // Calcular total
+        // Calculate total
         $total = Product::calculateTotal($cart);
 
-        // Validar fecha de entrega
+        // Validate delivery date
         Order::validate($request);
 
-        // Crear orden SIN user_id
+        // Create order (no user for now)
         $order = Order::create([
             'total' => $total,
             'delivery_date' => $request->delivery_date,
-            // 'user_id' => null // opcional si quieres dejarlo explícito
         ]);
 
-        // Agregar los ítems del carrito a la orden
+        // Add items to the order
         foreach ($cart as $productId => $details) {
             Item::create([
                 'product_id' => $productId,
@@ -42,18 +42,24 @@ class OrderController extends Controller
             ]);
         }
 
+        // Clear cart
         session()->forget('cart');
         session()->forget('cart_total');
         session()->forget('cart_quantity');
 
         return redirect()->route('orders.index', $order->id)
-            ->with('success', '¡Orden creada con éxito!');
+            ->with('success', 'Order created successfully!');
     }
 
-
-    public function index($id)
+    public function index($id): View
     {
         $order = Order::with('items.product')->findOrFail($id);
-        return view('orders.index', compact('order'));
+
+        $viewData = [];
+        $viewData['title'] = 'Order Summary';
+        $viewData['subtitle'] = 'Your completed purchase';
+        $viewData['order'] = $order;
+
+        return view('orders.index')->with('viewData', $viewData);
     }
 }
