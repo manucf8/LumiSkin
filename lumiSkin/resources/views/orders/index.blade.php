@@ -3,36 +3,52 @@
 @section('title', $viewData['title'])
 
 @section('content')
-<div class="container mt-4">
-    <h1>{{ $viewData['title'] }}</h1>
-    <p>{{ $viewData['subtitle'] }}</p>
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h2 class="text-center mb-3 fw-bold">{{ $viewData['title'] }}</h2>
+        <p class="text-center text-muted">{{ $viewData['subtitle'] }}</p>
 
-    <p><strong>Order Date:</strong> {{ $viewData['order']->getCreatedAt()->format('M d, Y H:i') }}</p>
-    <p><strong>Delivery Date:</strong> {{ $viewData['order']->getDeliveryDate()->format('M d, Y') }}</p>
-    <p><strong>Total:</strong> ${{ number_format($viewData['order']->getTotal(), 0, ',', '.') }}</p>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <strong>Order Date:</strong><br>
+                {{ $viewData['order']->getCreatedAt()->format('M d, Y H:i') }}
+            </div>
+            <div class="col-md-4">
+                <strong>Delivery Date:</strong><br>
+                {{ $viewData['order']->getDeliveryDate()->format('M d, Y') }}
+            </div>
+            <div class="col-md-4 text-uppercase">
+                <strong>Total: ${{ number_format($viewData['order']->getTotal(), 0, ',', '.') }}</strong>
+            </div>
+        </div>
 
-    <h3 class="mt-4">Purchased Products</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($viewData['order']->getItems() as $item)
-            <tr>
-                <td>{{ $item->product->getName() }}</td>
-                <td>{{ $item->getQuantity() }}</td>
-                <td>${{ number_format($item->getPrice(), 0, ',', '.') }}</td>
-                <td>${{ number_format($item->getSubtotal(), 0, ',', '.') }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+        <h4 class="mt-4 mb-3 fw-bold">Purchased Products</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Product</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Unit Price</th>
+                        <th class="text-center">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($viewData['order']->getItems() as $item)
+                    <tr>
+                        <td>{{ $item->product->getName() }}</td>
+                        <td class="text-center">{{ $item->getQuantity() }}</td>
+                        <td class="text-center">${{ number_format($item->getPrice(), 0, ',', '.') }}</td>
+                        <td class="text-center">${{ number_format($item->getSubtotal(), 0, ',', '.') }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-    <a href="{{ route('home.index') }}" class="btn btn-primary mt-3">Back to Store</a>
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-outline-primary">← Back to Store</a>
+        </div>
+    </div>
 </div>
 @endsection
