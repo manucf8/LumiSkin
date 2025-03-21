@@ -27,5 +27,5 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
 
 Route::controller(App\Http\Controllers\OrderController::class)->group(function (): void {
     Route::post('/orders', 'store')->name('orders.store');
-    Route::get('/orders/{id}', 'show')->name('orders.show');
+    Route::get('/orders/{id}', 'index')->name('orders.index');
 });

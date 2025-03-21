@@ -46,14 +46,14 @@ class OrderController extends Controller
         session()->forget('cart_total');
         session()->forget('cart_quantity');
 
-        return redirect()->route('orders.show', $order->id)
+        return redirect()->route('orders.index', $order->id)
             ->with('success', '¡Orden creada con éxito!');
     }
 
 
-    public function show($id)
+    public function index($id)
     {
         $order = Order::with('items.product')->findOrFail($id);
-        return view('orders.show', compact('order'));
+        return view('orders.index', compact('order'));
     }
 }
