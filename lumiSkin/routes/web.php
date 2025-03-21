@@ -17,7 +17,6 @@ Route::controller(App\Http\Controllers\CartController::class)->group(function ()
     Route::post('/cart/clear', 'clearCart')->name('cart.clear');
 });
 
-
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {
     Route::get('/categories', 'index')->name('category.index');
     Route::get('/categories/create', 'create')->name('category.create');

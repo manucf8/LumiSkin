@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Collection;
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -23,7 +23,6 @@ class Order extends Model
      * $this->attributes['user_id'] - int - contains the user id
      * $this->items - Item[] - contains the associated items
      */
-
     protected $fillable = ['total', 'delivery_date', 'user_id'];
 
     public static function validate($request): void
