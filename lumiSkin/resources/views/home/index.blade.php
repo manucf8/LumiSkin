@@ -31,7 +31,7 @@
             <div class="card p-3">
                 <h4>New Arrivals</h4>
                 <p>Check out the latest products added to our collection.</p>
-                <a href="#" class="btn btn-outline-dark">Explore</a>
+                <a href="{{ route('product.newest') }}" class="btn btn-outline-dark">Explore</a>
             </div>
         </div>
     </div>

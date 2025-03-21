@@ -85,9 +85,9 @@ class Product extends Model
         $this->attributes['price'] = $price;
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): string
     {
-        return Carbon::parse($this->attributes['created_at']);
+        return Carbon::parse($this->attributes['created_at'])->format('F j, Y');
     }
 
     public function getUpdatedAt(): Carbon

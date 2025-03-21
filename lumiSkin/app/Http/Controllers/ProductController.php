@@ -24,4 +24,14 @@ class ProductController extends Controller
 
         return view('product.index')->with('viewData', $viewData);
     }
+
+    public function newest(): View
+    {
+        $viewData = [];
+        $viewData['title'] = 'New Arrivals';
+        $viewData['subtitle'] = 'Discover our latest products';
+        $viewData['products'] = Product::orderBy('created_at', 'desc')->limit(3)->get();
+
+        return view('product.newest')->with('viewData', $viewData);
+    }
 }
