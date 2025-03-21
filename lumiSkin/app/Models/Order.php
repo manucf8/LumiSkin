@@ -24,7 +24,7 @@ class Order extends Model
      * $this->items - Item[] - contains the associated items
      */
 
-    protected $fillable = ['total', 'delivery_date', 'user_id'];
+    protected $fillable = ['total', 'delivery_date'];
 
     public static function validate($request): void
     {

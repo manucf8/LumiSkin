@@ -17,11 +17,15 @@ Route::controller(App\Http\Controllers\CartController::class)->group(function ()
     Route::post('/cart/clear', 'clearCart')->name('cart.clear');
 });
 
-
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {
     Route::get('/categories', 'index')->name('category.index');
     Route::get('/categories/create', 'create')->name('category.create');
     Route::get('/categories/{id}', 'show')->name('category.show');
     Route::post('/categories/store', 'store')->name('category.store');
     Route::delete('/categories/{id}/delete', 'delete')->name('category.delete');
+});
+
+Route::controller(App\Http\Controllers\OrderController::class)->group(function (): void {
+    Route::post('/orders', 'store')->name('orders.store');
+    Route::get('/orders/{id}', 'show')->name('orders.show');
 });
