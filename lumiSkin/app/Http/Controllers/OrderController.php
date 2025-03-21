@@ -22,9 +22,7 @@ class OrderController extends Controller
         $total = Product::calculateTotal($cart);
 
         // Validar fecha de entrega
-        $request->validate([
-            'delivery_date' => 'required|date|after:today'
-        ]);
+        Order::validate($request);
 
         // Crear orden SIN user_id
         $order = Order::create([

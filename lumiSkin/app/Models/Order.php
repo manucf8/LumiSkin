@@ -29,7 +29,6 @@ class Order extends Model
     public static function validate($request): void
     {
         $request->validate([
-            'total' => 'required|integer|min:1',
             'delivery_date' => 'required|date|after:today',
             // 'user_id' => 'required|exists:users,id'
         ]);
