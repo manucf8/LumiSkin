@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
-use Carbon\Carbon;
 
 class Product extends Model
 {
@@ -26,7 +27,6 @@ class Product extends Model
      *   $this->items - Item[] - contains the associated item
      *   $this->skincareTests - SkincareTest[] - contains the associated Skincare Test 'FALTA'
      */
-
     protected $fillable = ['name', 'description', 'image', 'brand', 'price'];
 
     public static function validate($request): void
@@ -85,9 +85,9 @@ class Product extends Model
         $this->attributes['price'] = $price;
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): string
     {
-        return Carbon::parse($this->attributes['created_at']);
+        return Carbon::parse($this->attributes['created_at'])->format('F j, Y');
     }
 
     public function getUpdatedAt(): Carbon
@@ -101,9 +101,9 @@ class Product extends Model
         return $this->categories;
     }
 
-    public function categories(): HasMany
+    public function categories(): BelongsToMany
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     // Relationship Items
@@ -128,6 +128,7 @@ class Product extends Model
     //     return $this->hasMany(SkincareTest::class);
     // }
 
+
     public static function calculateTotal(): int
     {
         $cart = session('cart', []);
@@ -139,4 +140,5 @@ class Product extends Model
         $cart = session('cart', []);
         return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
     }
+
 }

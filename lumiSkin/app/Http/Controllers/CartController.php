@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -13,11 +13,11 @@ class CartController extends Controller
         $product = Product::findOrFail($request->id);
         $cart = session()->get('cart', []);
 
-        if (!isset($cart[$product->id])) {
+        if (! isset($cart[$product->id])) {
             $cart[$product->id] = [
                 'name' => $product->name,
                 'price' => $product->price,
-                'quantity' => 1
+                'quantity' => 1,
             ];
         } else {
             $cart[$product->id]['quantity'] += 1;

@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 
 class Item extends Model
 {
@@ -24,7 +24,6 @@ class Item extends Model
      * $this->product - Product - contains the associated product
      * $this->order - Order - contains the associated Order
      */
-
     protected $fillable = ['quantity', 'subtotal', 'price', 'product_id', 'order_id'];
 
     public static function validate($request): void
@@ -34,7 +33,7 @@ class Item extends Model
             'subtotal' => 'required|int|min:1',
             'price' => 'required|int|min:1',
             'product_id' => 'required|exists:products,id',
-            'order_id' => 'required|exists:orders,id'
+            'order_id' => 'required|exists:orders,id',
         ]);
     }
 

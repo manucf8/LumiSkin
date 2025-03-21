@@ -22,7 +22,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
                     <li class="nav-item">

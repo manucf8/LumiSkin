@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unique(['order_id', 'product_id']);
         });
     }
+
     /**
      * Reverse the migrations.
      */

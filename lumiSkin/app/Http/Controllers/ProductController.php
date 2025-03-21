@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -23,5 +23,15 @@ class ProductController extends Controller
         $viewData['products'] = $query->get();
 
         return view('product.index')->with('viewData', $viewData);
+    }
+
+    public function newest(): View
+    {
+        $viewData = [];
+        $viewData['title'] = 'New Arrivals';
+        $viewData['subtitle'] = 'Discover our latest products';
+        $viewData['products'] = Product::orderBy('created_at', 'desc')->limit(3)->get();
+
+        return view('product.newest')->with('viewData', $viewData);
     }
 }
