@@ -96,9 +96,9 @@ class Product extends Model
     }
 
     // Relationship categories
-    public function getCategories(): Collection
+    public function getCategories(): string
     {
-        return $this->categories;
+        return $this->categories->pluck('name')->join(', ');
     }
 
     public function categories(): BelongsToMany
@@ -128,17 +128,30 @@ class Product extends Model
     //     return $this->hasMany(SkincareTest::class);
     // }
 
-
     public static function calculateTotal(): int
     {
         $cart = session('cart', []);
-        return array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
+
+        return array_sum(array_map(fn ($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
     }
 
     public static function calculateTotalQuantity(): int
     {
         $cart = session('cart', []);
-        return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
+
+        return array_sum(array_map(fn ($item) => $item['quantity'] ?? 1, $cart));
     }
 
+    public static function bestSellers(int $limit = 4): Collection
+    {
+        $topProducts = self::select('products.*')
+            ->join('items', 'products.id', '=', 'items.product_id')
+            ->selectRaw('SUM(items.quantity) as total_sold')
+            ->groupBy('products.id', 'products.name', 'products.description', 'products.price', 'products.brand', 'products.image', 'products.created_at', 'products.updated_at')
+            ->orderByDesc('total_sold')
+            ->take($limit)
+            ->get();
+
+        return $topProducts->isNotEmpty() ? $topProducts : self::take(3)->get();
+    }
 }

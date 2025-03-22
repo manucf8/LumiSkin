@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -52,7 +53,7 @@ class Category extends Model
 
     public function getCreatedAt(): string
     {
-        return $this->attributes['created_at'];
+        return Carbon::parse($this->attributes['created_at'])->format('F j, Y');
     }
 
     public function getUpdatedAt(): string

@@ -2,27 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Models\Product;
-use App\Models\Item;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     public function index(): View
     {
         // Buscar productos más vendidos (con base en cantidad)
-        $topProducts = Product::select('products.*')
-            ->join('items', 'products.id', '=', 'items.product_id')
-            ->selectRaw('SUM(items.quantity) as total_sold')
-            ->groupBy('products.id')
-            ->orderByDesc('total_sold')
-            ->take(4)
-            ->get();
-
-        // Si no hay productos vendidos aún, mostrar los primeros 3 productos del catálogo
-        if ($topProducts->isEmpty()) {
-            $topProducts = Product::take(3)->get();
-        }
+        $topProducts = Product::bestSellers();
 
         // Enviar datos a la vista
         $viewData = [];
