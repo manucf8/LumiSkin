@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
+use App\Models\Item;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\Item;
-use App\Models\Product;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {

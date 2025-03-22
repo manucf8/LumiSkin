@@ -9,6 +9,8 @@ Route::controller(App\Http\Controllers\HomeController::class)->group(function ()
 Route::controller(App\Http\Controllers\ProductController::class)->group(function (): void {
     Route::get('/products', 'index')->name('product.index');
     Route::get('/products/newest', 'newest')->name('product.newest');
+    Route::get('/products/searchByCategory', 'searchByCategory')->name('product.searchByCategory');
+
 });
 
 Route::controller(App\Http\Controllers\CartController::class)->group(function (): void {
