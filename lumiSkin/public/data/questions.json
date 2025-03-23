@@ -1,0 +1,33 @@
+[
+    {
+      "question": "¿Qué tipo de piel tienes?",
+      "name": "skin_type",
+      "options": ["Grasa", "Mixta", "Seca", "Normal", "Sensible"]
+    },
+    {
+      "question": "¿Con qué frecuencia usas maquillaje?",
+      "name": "makeup_frequency",
+      "options": ["Diariamente", "Ocasionalmente", "Rara vez", "Nunca"]
+    },
+    {
+      "question": "¿Tienes alguna alergia conocida?",
+      "name": "allergy",
+      "options": ["Sí", "No", "No estoy segura"]
+    },
+    {
+      "question": "¿Qué acabado prefieres en tu base de maquillaje?",
+      "name": "foundation_finish",
+      "options": ["Mate", "Natural", "Glow / Luminoso"]
+    },
+    {
+      "question": "¿Prefieres productos cruelty-free?",
+      "name": "cruelty_free",
+      "options": ["Sí", "No", "No me importa"]
+    },
+    {
+      "question": "¿Qué nivel de cobertura prefieres?",
+      "name": "coverage_level",
+      "options": ["Ligera", "Media", "Alta"]
+    }
+  ]
+  
