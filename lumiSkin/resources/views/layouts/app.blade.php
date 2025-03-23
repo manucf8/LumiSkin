@@ -19,31 +19,30 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
 
-                @guest 
-                <a class="nav-link active" href="{{ route('login') }}">Login</a> 
-                <a class="nav-link active" href="{{ route('register') }}">Register</a> 
-                @else 
-                <form id="logout" action="{{ route('logout') }}" method="POST"> 
-                    <a role="button" class="nav-link active" 
-                    onclick="document.getElementById('logout').submit();">Logout</a> 
-                    @csrf 
-                </form> 
-                @endguest
+                    @guest
+                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                    @else
+                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                        <a role="button" class="nav-link active"
+                            onclick="document.getElementById('logout').submit();">Logout</a>
+                        @csrf
+                    </form>
+                    @endguest
 
-                <li class="nav-item">
-                    <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                        🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                    <li class="nav-item">
+                        <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+                            🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
         </div>
     </nav>
