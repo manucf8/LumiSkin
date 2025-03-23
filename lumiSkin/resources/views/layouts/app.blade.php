@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <title>@yield('title', 'LumiSkin')</title>
@@ -25,11 +26,15 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
 
-                @guest
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
-                @else
-                    <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+                @guest 
+                <a class="nav-link active" href="{{ route('login') }}">Login</a> 
+                <a class="nav-link active" href="{{ route('register') }}">Register</a> 
+                @else 
+                <form id="logout" action="{{ route('logout') }}" method="POST"> 
+                    <a role="button" class="nav-link active" 
+                    onclick="document.getElementById('logout').submit();">Logout</a> 
+                    @csrf 
+                </form> 
                 @endguest
 
                 <li class="nav-item">
