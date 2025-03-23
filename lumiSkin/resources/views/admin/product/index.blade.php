@@ -51,6 +51,18 @@
         <label class="form-label">Description</label>
         <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
       </div>
+      <div class="mb-3">
+        <label class="form-label">Brand</label>
+        <input type="text" class="form-control" name="brand" value="{{ old('brand') }}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-control" name="category">
+          @foreach($viewData['categories'] as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+          @endforeach
+        </select>
+      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

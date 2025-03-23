@@ -24,7 +24,7 @@
                 <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">Skincare test</a></li>
 
                 @guest 
                 <a class="nav-link active" href="{{ route('login') }}">Login</a> 
