@@ -89,12 +89,22 @@
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">
                 <!-- Proceed to Checkout Form -->
+                @auth
+                <!-- Si el usuario está autenticado -->
                 <form method="POST" action="{{ route('orders.store') }}" class="cart-form">
                     @csrf
                     <label for="delivery_date" class="fw-bold mb-1">Choose delivery date:</label>
                     <input type="date" name="delivery_date" id="delivery_date" class="form-control mb-2" required min="{{ now()->addDay()->toDateString() }}">
                     <button type="submit" class="btn btn-primary w-100 fw-bold">🛒 Place Order</button>
                 </form>
+                @endauth
+
+                @guest
+                <!-- Si el usuario NO está autenticado -->
+                <a href="{{ route('login') }}" class="btn btn-warning w-100 fw-bold"
+                    onclick="alert('Please login before placing an order.')">🔐 Login to Place Order</a>
+                @endguest
+
 
                 <!-- Clear Cart Button -->
                 <form method="POST" action="{{ route('cart.clear') }}" class="cart-form">
