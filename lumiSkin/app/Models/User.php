@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -62,11 +64,6 @@ class User extends Authenticatable
         return $this->attributes['id'];
     }
 
-    public function setId($id)
-    {
-        $this->attributes['id'] = $id;
-    }
-
     public function getName()
     {
         return $this->attributes['name'];
@@ -112,28 +109,28 @@ class User extends Authenticatable
         return $this->attributes['balance'];
     }
 
-    public function setBalance($balance)
+    public function setBalance($balance): void
     {
         $this->attributes['balance'] = $balance;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($createdAt)
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
 
-    public function setUpdatedAt($updatedAt)
+    public function skincareTest(): HasOne
     {
-        $this->attributes['updated_at'] = $updatedAt;
+        return $this->hasOne(SkincareTest::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

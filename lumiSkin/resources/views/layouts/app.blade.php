@@ -26,11 +26,15 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
 
-                @guest
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
-                @else
-                    <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+                @guest 
+                <a class="nav-link active" href="{{ route('login') }}">Login</a> 
+                <a class="nav-link active" href="{{ route('register') }}">Register</a> 
+                @else 
+                <form id="logout" action="{{ route('logout') }}" method="POST"> 
+                    <a role="button" class="nav-link active" 
+                    onclick="document.getElementById('logout').submit();">Logout</a> 
+                    @csrf 
+                </form> 
                 @endguest
 
                 <li class="nav-item">
