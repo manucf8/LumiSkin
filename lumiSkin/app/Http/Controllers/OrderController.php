@@ -8,6 +8,8 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -25,11 +27,13 @@ class OrderController extends Controller
         // Validate delivery date
         Order::validate($request);
 
-        // Create order (no user for now)
+        // Create order with user_id
         $order = Order::create([
+            'user_id' => Auth::id(),
             'total' => $total,
             'delivery_date' => $request->delivery_date,
         ]);
+
 
         // Add items to the order
         foreach ($cart as $productId => $details) {
