@@ -2,7 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name("home.index");
+Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
+    Route::get('/', 'index')->name('home.index');
+});
+
+Route::controller(App\Http\Controllers\ProductController::class)->group(function (): void {
+    Route::get('/products', 'index')->name('product.index');
+    Route::get('/products/newest', 'newest')->name('product.newest');
+    Route::get('/products/searchByCategory', 'searchByCategory')->name('product.searchByCategory');
+
+});
+
+Route::controller(App\Http\Controllers\CartController::class)->group(function (): void {
+    Route::post('/cart/add', 'addToCart')->name('cart.add');
+    Route::post('/cart/update/{id}', 'updateCart')->name('cart.update');
+    Route::post('/cart/remove/{id}', 'removeFromCart')->name('cart.remove');
+    Route::post('/cart/clear', 'clearCart')->name('cart.clear');
+});
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {
     Route::get('/categories', 'index')->name('category.index');
@@ -10,4 +26,9 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
     Route::get('/categories/{id}', 'show')->name('category.show');
     Route::post('/categories/store', 'store')->name('category.store');
     Route::delete('/categories/{id}/delete', 'delete')->name('category.delete');
+});
+
+Route::controller(App\Http\Controllers\OrderController::class)->group(function (): void {
+    Route::post('/orders', 'store')->name('orders.store');
+    Route::get('/orders/{id}', 'index')->name('orders.index');
 });
