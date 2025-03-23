@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Services\ChatGPTService;
 
 Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
     Route::get('/', 'index')->name('home.index');
@@ -45,6 +47,11 @@ Route::middleware('admin')->group(function (): void {
         Route::get('/admin/products/{id}/edit', 'edit')->name('admin.product.edit');
         Route::put('/admin/products/{id}/update', 'update')->name('admin.product.update');
     });
+});
+
+Route::controller(App\Http\Controllers\SkincareTestController::class)->group(function (): void {
+    Route::get('/skincare-test', 'index')->name('skincare_test.index');
+    Route::post('/skincare-test', 'getRecommendation')->name('skincare_test.recommendation');    
 });
 
 Auth::routes();
