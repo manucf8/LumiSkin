@@ -55,6 +55,11 @@ class Product extends Model
         $this->attributes['name'] = $name;
     }
 
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
     public function getDescription(): string
     {
         return $this->attributes['description'];

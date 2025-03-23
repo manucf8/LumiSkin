@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,6 +15,7 @@ class AdminProductController extends Controller
         $viewData = [];
         $viewData['title'] = 'Admin Page - Products - Online Store';
         $viewData['products'] = Product::all();
+        $viewData['categories'] = Category::all();
 
         return view('admin.product.index')->with('viewData', $viewData);
     }
@@ -26,8 +28,11 @@ class AdminProductController extends Controller
         $newProduct->setName($request->input('name'));
         $newProduct->setDescription($request->input('description'));
         $newProduct->setPrice($request->input('price'));
+        $newProduct->setBrand($request->input('brand'));
         $newProduct->setImage('game.png');
         $newProduct->save();
+
+        $newProduct->categories()->attach($request->input('category'));
 
         if ($request->hasFile('image')) {
             $imageName = $newProduct->getId().'.'.$request->file('image')->extension();
