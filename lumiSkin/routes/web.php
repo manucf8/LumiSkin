@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Services\ChatGPTService;
 
 // shop routes
 Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
@@ -56,5 +58,10 @@ Route::middleware('admin')->group(function () {
     Route::put('/admin/products/{id}/update', 'App\Http\Controllers\Admin\AdminProductController@update')->name("admin.product.update");
 });
 */
+
+Route::controller(App\Http\Controllers\SkincareTestController::class)->group(function (): void {
+    Route::get('/skincare-test', 'index')->name('skincare_test.index');
+    Route::post('/skincare-test', 'getRecommendation')->name('skincare_test.recommendation');    
+});
 
 Auth::routes();
