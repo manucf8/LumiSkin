@@ -18,20 +18,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Skincare test</a></li>
+
+                @guest
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
+                @else
                     <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                            🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                @endguest
+
+                <li class="nav-item">
+                    <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+                        🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
         </div>
     </nav>
     <!-- Navbar -->

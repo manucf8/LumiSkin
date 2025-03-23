@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+// shop routes
 Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
     Route::get('/', 'index')->name('home.index');
 });
@@ -10,7 +11,6 @@ Route::controller(App\Http\Controllers\ProductController::class)->group(function
     Route::get('/products', 'index')->name('product.index');
     Route::get('/products/newest', 'newest')->name('product.newest');
     Route::get('/products/searchByCategory', 'searchByCategory')->name('product.searchByCategory');
-
 });
 
 Route::controller(App\Http\Controllers\CartController::class)->group(function (): void {
@@ -32,3 +32,29 @@ Route::controller(App\Http\Controllers\OrderController::class)->group(function (
     Route::post('/orders', 'store')->name('orders.store');
     Route::get('/orders/{id}', 'index')->name('orders.index');
 });
+
+// Admin routes
+Route::controller(App\Http\Controllers\Admin\AdminHomeController::class)->group(function (): void {
+    Route::get('/admin', 'index')->name('admin.home.index');
+});
+
+Route::controller(App\Http\Controllers\Admin\AdminProductController::class)->group(function (): void {
+    Route::get('/admin/products', 'index')->name('admin.product.index');
+    Route::post('/admin/products/store', 'store')->name('admin.product.store');
+    Route::delete('/admin/products/{id}/delete', 'delete')->name('admin.product.delete');
+    Route::get('/admin/products/{id}/edit', 'edit')->name('admin.product.edit');
+    Route::put('/admin/products/{id}/update', 'update')->name('admin.product.update');
+});
+
+/*
+Route::middleware('admin')->group(function () {
+    Route::get('/admin', 'App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
+    Route::get('/admin/products', 'App\Http\Controllers\Admin\AdminProductController@index')->name("admin.product.index");
+    Route::post('/admin/products/store', 'App\Http\Controllers\Admin\AdminProductController@store')->name("admin.product.store");
+    Route::delete('/admin/products/{id}/delete', 'App\Http\Controllers\Admin\AdminProductController@delete')->name("admin.product.delete");
+    Route::get('/admin/products/{id}/edit', 'App\Http\Controllers\Admin\AdminProductController@edit')->name("admin.product.edit");
+    Route::put('/admin/products/{id}/update', 'App\Http\Controllers\Admin\AdminProductController@update')->name("admin.product.update");
+});
+*/
+
+Auth::routes();

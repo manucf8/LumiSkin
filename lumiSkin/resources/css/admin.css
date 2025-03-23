@@ -1,0 +1,36 @@
+.copyright {
+    background-color: #B0D8E8;
+}
+
+.fixed {
+    -ms-flex: 0 0 250px;
+    flex: 0 0 250px;
+    background-color: #C1E1EE;
+}
+
+.content-grey {
+    background-color: #D5E7F1;
+}
+
+hr {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    border-color: #B0D8E8;
+}
+
+.img-profile {
+    height: 2rem;
+    width: 2rem;
+    border: 2px solid #EDCEB5;
+}
+
+.profile-font {
+    color: #6D7A88 !important;
+    font-size: 80%;
+    font-weight: 400;
+}
+
+.card-header {
+    background-color: #EDCEB5;
+    border-bottom: 1px solid #C1E1EE;
+}
