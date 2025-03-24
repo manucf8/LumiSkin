@@ -4,7 +4,10 @@
 
 1. Have [XAMPP](https://www.apachefriends.org/) installed in your computer.
 2. Have [Composer](https://getcomposer.org/download/) installed in your computer.
-3. For the Skincare Test to work, you need to add an OpenAI API Key inside your .env file.
+3. For the Skincare Test to work, you need to add an OpenAI API Key inside your .env file, like so:
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   ```
 
 ## Installation
 - Clone the repository to your local machine.
