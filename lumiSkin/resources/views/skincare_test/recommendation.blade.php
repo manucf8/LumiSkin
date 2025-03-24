@@ -20,6 +20,10 @@
         @if (!empty($viewData['explanation']))
             <p>{{ $viewData['explanation'] }}</p>
         @endif
+
+        <a href="{{ route('skincare_test.routine', ['test' => $viewData['test']->id]) }}" class="btn btn-primary">
+            Generate Skincare Routine
+        </a>
     @endif
 
     <a href="{{ route('skincare_test.index') }}">Back to the Test</a>
