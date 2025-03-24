@@ -53,7 +53,8 @@ Route::middleware('admin')->group(function (): void {
 
 Route::controller(App\Http\Controllers\SkincareTestController::class)->group(function (): void {
     Route::get('/skincare-test', 'index')->name('skincare_test.index');
-    Route::post('/skincare-test', 'getRecommendation')->name('skincare_test.recommendation');
+    Route::post('/skincare-test', 'store')->name('skincare_test.store');
+    Route::get('/skincare-recommendation/{test}', 'getRecommendation')->name('skincare_test.recommendation');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -61,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', 'index')->name('profile.index');
         Route::post('/profile/increaseBalance', 'increaseBalance')->name('profile.increaseBalance');
     });
+
 });
 
 Auth::routes();

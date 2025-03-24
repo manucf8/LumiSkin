@@ -15,10 +15,21 @@ class ChatGPTService
 
     public function getRecommendationFromProducts($userResponses, $products): mixed
     {
-        $prompt = 'Eres un experto en maquillaje. A continuación te paso las respuestas del usuario: '.json_encode($userResponses).
-          '. Y estos son los productos disponibles en la tienda (no puedes inventar otros productos): '.json_encode($products).
-          '. Tu tarea es recomendarle SOLO productos de la lista anterior, seleccionando los más adecuados según su tipo de piel, tono y preferencias. 
-          Debes mencionar el NOMBRE del producto y su MARCA tal como aparece en la lista.';
+        $prompt = "You are a makeup expert. Below I provide the user's responses: ".json_encode($userResponses).
+          '. Additionally, these are the products available in the store (you cannot invent other products): '.json_encode($products).
+          '. Your task is to recommend the most suitable products from the list above, based on their skin type, tone, and preferences. 
+          **Important instructions**:
+          1. You can recommend more than one product.
+          2. Mention the PRODUCT NAME and BRAND as they appear in the list.
+          3. Use the following format for each recommended product:
+             - Product name: [Product name], Brand: [Brand]
+          4. At the end, add a brief user-friendly explanation of why these products are ideal for them.
+          
+          **Example response**:
+          - Product name: Matte Foundation, Brand: Maybelline
+          - Product name: Intense Red Lipstick, Brand: MAC
+          
+          These products are ideal for you because they control shine and offer a long-lasting finish, perfect for your combination skin and preference for long-wear makeup.';
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->apiKey,
@@ -26,19 +37,18 @@ class ChatGPTService
         ])->post('https://api.openai.com/v1/chat/completions', [
             'model' => 'gpt-3.5-turbo',
             'messages' => [
-                ['role' => 'system', 'content' => 'Eres un asesor de maquillaje profesional. Solo puedes recomendar productos de la tienda. Está prohibido inventar productos.'],
+                ['role' => 'system', 'content' => 'You are a professional makeup advisor. You can only recommend products from the store. Inventing products is prohibited.'],
                 ['role' => 'user', 'content' => $prompt],
             ],
             'max_tokens' => 500,
         ]);
 
-        // Validación por si falla la API
         if ($response->successful()) {
             $data = $response->json();
 
-            return $data['choices'][0]['message']['content'] ?? 'No se pudo generar la recomendación.';
+            return $data['choices'][0]['message']['content'] ?? 'Could not generate the recommendation.';
         } else {
-            return 'Error al conectar con ChatGPT: '.$response->body();
+            return 'Error connecting to ChatGPT: '.$response->body();
         }
     }
 }
