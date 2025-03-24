@@ -17,11 +17,14 @@ class SkincareTest extends Model
      * $this->attributes['user'] - User - contains the associated user
      * $this->recommendations - Product[] - contains the associated products
      */
+    protected $fillable = ['user_id', 'responses'];
+
     public static function validate($request): void
     {
         $request->validate([
             'responses' => 'required|array',
-            'user' => 'required|exists:users,id',
+            'responses.*' => 'required|string',
+            'user_id' => 'required|exists:users,id',
         ]);
     }
 
@@ -57,7 +60,6 @@ class SkincareTest extends Model
 
     public function recommendations(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_skincare_test');
     }
-
 }

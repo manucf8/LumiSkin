@@ -1,33 +1,32 @@
 [
     {
-      "question": "¿Qué tipo de piel tienes?",
+      "question": "What type of skin do you have?",
       "name": "skin_type",
-      "options": ["Grasa", "Mixta", "Seca", "Normal", "Sensible"]
+      "options": ["Oily", "Combination", "Dry", "Normal", "Sensitive"]
     },
     {
-      "question": "¿Con qué frecuencia usas maquillaje?",
+      "question": "How often do you wear makeup?",
       "name": "makeup_frequency",
-      "options": ["Diariamente", "Ocasionalmente", "Rara vez", "Nunca"]
+      "options": ["Daily", "Occasionally", "Rarely", "Never"]
     },
     {
-      "question": "¿Tienes alguna alergia conocida?",
+      "question": "Do you have any known allergies?",
       "name": "allergy",
-      "options": ["Sí", "No", "No estoy segura"]
+      "options": ["Yes", "No", "Not sure"]
     },
     {
-      "question": "¿Qué acabado prefieres en tu base de maquillaje?",
+      "question": "What finish do you prefer in your foundation?",
       "name": "foundation_finish",
-      "options": ["Mate", "Natural", "Glow / Luminoso"]
+      "options": ["Matte", "Natural", "Glow / Luminous"]
     },
     {
-      "question": "¿Prefieres productos cruelty-free?",
+      "question": "Do you prefer cruelty-free products?",
       "name": "cruelty_free",
-      "options": ["Sí", "No", "No me importa"]
+      "options": ["Yes", "No", "I don't care"]
     },
     {
-      "question": "¿Qué nivel de cobertura prefieres?",
+      "question": "What level of coverage do you prefer?",
       "name": "coverage_level",
-      "options": ["Ligera", "Media", "Alta"]
+      "options": ["Light", "Medium", "Full"]
     }
-  ]
-  
+]

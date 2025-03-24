@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -124,9 +123,9 @@ class User extends Authenticatable
         return $this->attributes['updated_at'];
     }
 
-    public function skincareTest(): HasOne
+    public function skincareTest(): HasMany
     {
-        return $this->hasOne(SkincareTest::class);
+        return $this->hasMany(SkincareTest::class);
     }
 
     public function orders(): HasMany

@@ -7,9 +7,8 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -33,7 +32,6 @@ class OrderController extends Controller
             'total' => $total,
             'delivery_date' => $request->delivery_date,
         ]);
-
 
         // Add items to the order
         foreach ($cart as $productId => $details) {
