@@ -135,10 +135,10 @@ class Product extends Model
         return $this->skincareTests;
     }
 
-    // public function skincareTests(): HasMany
-    // {
-    //     return $this->hasMany(SkincareTest::class);
-    // }
+    public function skincareTests(): BelongsToMany
+    {
+        return $this->belongsToMany(SkincareTest::class, 'product_skincare_test');
+    }
 
     public static function calculateTotal(): int
     {
@@ -165,5 +165,12 @@ class Product extends Model
             ->get();
 
         return $topProducts->isNotEmpty() ? $topProducts : self::take(3)->get();
+    }
+
+    public static function extractProductNames(string $recommendationText): array
+    {
+        preg_match_all('/\b[A-Za-z0-9\s\-]+\b/', $recommendationText, $matches);
+
+        return $matches[0];
     }
 }
