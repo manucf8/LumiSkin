@@ -8,7 +8,7 @@
 @endif
 <div class="card mb-4">
   <div class="card-header">
-    Create Products
+  {{ __('products.create') }}
   </div>
   <div class="card-body">
     @if($errors->any())
@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
-            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">{{ __('products.name') }}:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input name="name" value="{{ old('name') }}" type="text" class="form-control">
             </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="col">
           <div class="mb-3 row">
-            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">{{ __('products.price') }}:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input name="price" value="{{ old('price') }}" type="number" class="form-control">
             </div>
@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
-            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Image:</label>
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">{{ __('products.image') }}:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input class="form-control" type="file" name="image">
             </div>
@@ -53,15 +53,15 @@
         </div>
       </div>
       <div class="mb-3">
-        <label class="form-label">Description</label>
+        <label class="form-label">{{ __('products.description') }}</label>
         <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
       </div>
       <div class="mb-3">
-        <label class="form-label">Brand</label>
+        <label class="form-label">{{ __('products.brand') }}</label>
         <input type="text" class="form-control" name="brand" value="{{ old('brand') }}">
       </div>
       <div class="mb-3">
-      <label class="form-label">Categories</label>
+      <label class="form-label">{{ __('products.categories') }}</label>
       <div>
           @foreach($viewData['categories'] as $category)
               <div class="form-check">
@@ -73,23 +73,23 @@
           @endforeach
       </div>
     </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">{{ __('app.submit') }}</button>
     </form>
   </div>
 </div>
 
 <div class="card">
   <div class="card-header">
-    Manage Products
+  {{ __('products.manage') }}
   </div>
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
+          <th scope="col">{{ __('app.id') }}</th>
+          <th scope="col">{{ __('app.name') }}</th>
+          <th scope="col">{{ __('app.edit') }}</th>
+          <th scope="col">{{ __('app.delete') }}</th>
         </tr>
       </thead>
       <tbody>
