@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\RecommendationServiceInterface;
 use App\Http\Middleware\AdminAuthMiddleware;
+use App\Services\ChatGPTService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(RecommendationServiceInterface::class, ChatGPTService::class);
     }
 
     /**

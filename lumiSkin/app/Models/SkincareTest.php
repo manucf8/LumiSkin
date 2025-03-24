@@ -58,6 +58,11 @@ class SkincareTest extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function setUser($user): void
+    {
+        $this->user()->associate($user);
+    }
+
     public function recommendations(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'product_skincare_test');

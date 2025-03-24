@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\RecommendationServiceInterface;
 use App\Models\Product;
 use App\Models\SkincareTest;
-use App\Services\ChatGPTService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,12 @@ use Illuminate\View\View;
 
 class SkincareTestController extends Controller
 {
-    protected $chatGPTService;
+    protected RecommendationServiceInterface $recommendationService;
+
+    public function __construct(RecommendationServiceInterface $recommendationService)
+    {
+        $this->recommendationService = $recommendationService;
+    }
 
     public function index(): View
     {
@@ -26,18 +31,9 @@ class SkincareTestController extends Controller
         return view('skincare_test.index')->with('viewData', $viewData);
     }
 
-    public function __construct(ChatGPTService $chatGPTService)
-    {
-        $this->chatGPTService = $chatGPTService;
-    }
-
     public function getRecommendation(SkincareTest $test): View
     {
-        $recommendationText = $test->recommendations;
-
-        $recommendedProductNames = Product::extractProductNames($recommendationText);
-
-        $recommendedProducts = Product::whereIn('name', $recommendedProductNames)->get();
+        $recommendedProducts = $test->recommendations()->get();
 
         $explanation = session('explanation');
 
@@ -47,9 +43,30 @@ class SkincareTestController extends Controller
             'recommendedProducts' => $recommendedProducts,
             'explanation' => $explanation,
             'noProductsMessage' => 'No products found',
+            'test' => $test,
         ];
 
         return view('skincare_test.recommendation')->with('viewData', $viewData);
+    }
+
+    public function generateRoutine(SkincareTest $test): View
+    {
+        $userResponses = $test->getResponses();
+        $recommendedProducts = $test->recommendations()->get();
+
+        $prompt = "You are a skincare expert. Below are the user's responses to a skincare test: ".json_encode($userResponses).
+            '. Additionally, here are the recommended products based on their preferences: '.json_encode($recommendedProducts).
+            '. Based on this, generate a detailed skincare routine including steps like cleansing, moisturizing, and sunscreen application.';
+
+        $routineText = $this->recommendationService->getRoutine($prompt);
+
+        $viewData = [
+            'title' => 'Your Skincare Routine',
+            'subtitle' => 'A personalized skincare routine based on your answers',
+            'routine' => $routineText,
+        ];
+
+        return view('skincare_test.routine')->with('viewData', $viewData);
     }
 
     public function store(Request $request): RedirectResponse
@@ -57,11 +74,16 @@ class SkincareTestController extends Controller
         SkincareTest::validate($request);
 
         $test = new SkincareTest;
-        $test->user_id = Auth::id();
+        $user = Auth::user();
+        if (! $user) {
+            abort(403, 'Unauthorized');
+        }
+        $test->setUser($user);
+        $test->setUser(Auth::user());
         $test->setResponses($request->responses);
         $test->save();
 
-        $userResponses = $request->responses;
+        $userResponses = $test->getResponses();
         $products = Product::all(['name', 'description', 'brand', 'price']);
 
         if ($products->isEmpty()) {
@@ -71,7 +93,7 @@ class SkincareTestController extends Controller
 
         } else {
 
-            $recommendationText = $this->chatGPTService->getRecommendationFromProducts($userResponses, $products);
+            $recommendationText = $this->recommendationService->getRecommendationFromProducts($userResponses, $products);
 
             $recommendedProductNames = Product::extractProductNames($recommendationText);
 
@@ -87,6 +109,6 @@ class SkincareTestController extends Controller
             $explanation = trim($explanation);
         }
 
-        return redirect()->route('skincare_test.recommendation', ['test' => $test->id])->with('explanation', $explanation);
+        return redirect()->route('skincare_test.recommendation', ['test' => $test->getId()])->with('explanation', $explanation);
     }
 }
