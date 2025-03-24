@@ -8,7 +8,7 @@
 @endif
 <div class="card mb-4">
   <div class="card-header">
-    Create Categories
+    {{ __('categories.create') }}
   </div>
   <div class="card-body">
     @if($errors->any())
@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
-            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">{{ __('app.name') }}:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input name="name" value="{{ old('name') }}" type="text" class="form-control">
             </div>
@@ -32,26 +32,26 @@
         </div>
       </div>
       <div class="mb-3">
-        <label class="form-label">Description</label>
+        <label class="form-label">{{ __('app.description') }}</label>
         <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
       </div>
     </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">{{ __('app.submit') }}</button>
     </form>
   </div>
 
 <div class="card">
   <div class="card-header">
-    Manage Categories
+    {{ __('categories.manage') }}
   </div>
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
+          <th scope="col">{{ __('app.id') }}</th>
+          <th scope="col">{{ __('app.name') }}</th>
+          <th scope="col">{{ __('app.edit') }}</th>
+          <th scope="col">{{ __('app.delete') }}</th>
         </tr>
       </thead>
       <tbody>

@@ -3,10 +3,10 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    Admin Panel - Home Page
+    {{ __('admin.home') }}
   </div>
   <div class="card-body">
-    Welcome to the Admin Panel, use the sidebar to navigate between the different options.
+    {{ __('admin.welcome') }}
   </div>
 </div>
 @endsection

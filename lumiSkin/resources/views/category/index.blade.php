@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-header">
-        List of all categories
+        {{ __('categories.list') }}
     </div>
     <div class="card-body">
         <div class="row">
