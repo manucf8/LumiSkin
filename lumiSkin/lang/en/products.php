@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'list' => 'List of all products',
+    'discover' => 'Discover our collection',
+    'discover_latest' => 'Discover our latest products',
     'new_arrivals' => 'New Arrivals',
     'new_arrivals_desc' => 'These are the newest products in our catalog! Stay up to date with the latest trends.',
     'added' => 'Added to our catalog on',

@@ -14,4 +14,8 @@ return [
     'unit_price' => 'Unit Price',
     'subtotal' => 'Subtotal',
     'pdf' => 'Download PDF',
+    'create_success' => 'Order created successfully',
+    'summary' => 'Order Summary',
+    'completed_purchase' => 'Your completed purchase',
+    'success' => 'Your order has been processed successfully!',
 ];

@@ -23,4 +23,5 @@ return [
     'facebook' => 'Facebook',
     'tiktok' => 'TikTok',
     'back' => '← Back to Store',
+    'remove' => 'Remove',
 ];

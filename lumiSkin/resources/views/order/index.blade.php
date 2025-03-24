@@ -53,7 +53,7 @@
 
         <div class="text-center mt-4">
             <a href="{{ route('order.pdf', ['id' => $viewData['order']->getId()]) }}" class="btn btn-outline-primary">
-                {{ __('orders.download_pdf') }}
+                {{ __('orders.pdf') }}
             </a>
             <a href="/" class="btn btn-outline-primary">{{ __('app.back') }}</a>
         </div>

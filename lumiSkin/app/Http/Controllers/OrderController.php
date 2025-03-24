@@ -20,7 +20,7 @@ class OrderController extends Controller
         $cart = session('cart', []);
 
         if (empty($cart)) {
-            return redirect()->back()->with('error', 'Cart is empty');
+            return redirect()->back()->with('error', __('cart.empty'));
         }
 
         $total = Product::calculateTotal($cart);
@@ -46,7 +46,7 @@ class OrderController extends Controller
         $user = Auth::user();
 
         if ($user->balance < $total) {
-            return redirect()->back()->with('error', 'Insufficient balance');
+            return redirect()->back()->with('error', __('profile.insufficient_balance'));
         }
 
         $user->decreaseBalance($total);
@@ -56,7 +56,7 @@ class OrderController extends Controller
         session()->forget('cart_quantity');
 
         return redirect()->route('order.index', $order->id)
-            ->with('success', 'Order created successfully!');
+            ->with('success', __('orders.create_success'));
     }
 
     public function index($id): View
@@ -64,8 +64,8 @@ class OrderController extends Controller
         $order = Order::with('items.product')->findOrFail($id);
 
         $viewData = [];
-        $viewData['title'] = 'Order Summary';
-        $viewData['subtitle'] = 'Your completed purchase';
+        $viewData['title'] = __('orders.summary');
+        $viewData['subtitle'] = __('orders.completed_purchase');
         $viewData['order'] = $order;
 
         return view('order.index')->with('viewData', $viewData);
@@ -76,8 +76,8 @@ class OrderController extends Controller
         $order = Order::with(['user', 'items.product'])->findOrFail($id);
 
         $viewData = [
-            'title' => 'Order Summary',
-            'subtitle' => 'Your order has been processed successfully!',
+            'title' => __('orders.summary'),
+            'subtitle' => __('orders.success'),
             'order' => $order,
         ];
 

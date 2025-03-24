@@ -21,24 +21,16 @@ class ChatGPTService implements RecommendationServiceInterface
 
     public function getRecommendationFromProducts(array $userResponses, Collection $products): mixed
     {
-        $prompt = "You are a makeup expert. Below I provide the user's responses: ".json_encode($userResponses).
-            '. Additionally, these are the products available in the store (you cannot invent other products): '.json_encode($products).
-            '. Your task is to recommend the most suitable products from the list above, based on their skin type, tone, and preferences. 
-            **Important instructions**:
-            1. You can recommend more than one product.
-            2. Mention the PRODUCT NAME and BRAND as they appear in the list.
-            3. Use the following format for each recommended product:
-               - Product name: [Product name], Brand: [Brand]
-            4. At the end, add a brief user-friendly explanation of why these products are ideal for them.
-            
-            **Example response**:
-            - Product name: Matte Foundation, Brand: Maybelline
-            - Product name: Intense Red Lipstick, Brand: MAC
-            
-            These products are ideal for you because they control shine and offer a long-lasting finish, perfect for your combination skin and preference for long-wear makeup.';
+        $prompt = __(
+            'skincare_test.makeup_recommendation_prompt',
+            [
+                'responses' => json_encode($userResponses),
+                'products' => json_encode($products),
+            ]
+        );
 
         return $this->callChatGPT(
-            systemMessage: 'You are a professional makeup advisor. You can only recommend products from the store. Inventing products is prohibited.',
+            systemMessage: __('skincare_test.makeup_system_message'),
             userPrompt: $prompt
         );
     }
@@ -46,7 +38,7 @@ class ChatGPTService implements RecommendationServiceInterface
     public function getRoutine(string $prompt): mixed
     {
         return $this->callChatGPT(
-            systemMessage: 'You are a skincare expert. Based on the user responses and the recommended products, generate a skincare routine.',
+            systemMessage: __('skincare_test.skincare_system_message'),
             userPrompt: $prompt
         );
     }
@@ -68,9 +60,9 @@ class ChatGPTService implements RecommendationServiceInterface
         if ($response->successful()) {
             $data = $response->json();
 
-            return $data['choices'][0]['message']['content'] ?? 'Could not generate the response.';
+            return $data['choices'][0]['message']['content'] ?? __('skincare_test.no_response');
         }
 
-        return 'Error connecting to ChatGPT: '.$response->body();
+        return __('skincare_test.chatgpt_error').$response->body();
     }
 }

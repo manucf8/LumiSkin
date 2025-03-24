@@ -22,8 +22,8 @@ class SkincareTestController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'Skincare Recommendation Test';
-        $viewData['subtitle'] = 'Fill out the form to get your personalized skincare recommendation';
+        $viewData['title'] = __('skincare_test.title');
+        $viewData['subtitle'] = __('skincare_test.form');
 
         $questions = json_decode(file_get_contents(public_path('data/questions.json')), true);
         $viewData['questions'] = $questions;
@@ -38,11 +38,11 @@ class SkincareTestController extends Controller
         $explanation = session('explanation');
 
         $viewData = [
-            'title' => 'Product Recommendations',
-            'subtitle' => 'Based on your answers, here are our product recommendations',
+            'title' => __('skincare_test.recommendations'),
+            'subtitle' => __('skincare_test.based_on_answers'),
             'recommendedProducts' => $recommendedProducts,
             'explanation' => $explanation,
-            'noProductsMessage' => 'No products found',
+            'noProductsMessage' => __('skincare_test.no_products'),
             'test' => $test,
         ];
 
@@ -54,15 +54,19 @@ class SkincareTestController extends Controller
         $userResponses = $test->getResponses();
         $recommendedProducts = $test->recommendations()->get();
 
-        $prompt = "You are a skincare expert. Below are the user's responses to a skincare test: ".json_encode($userResponses).
-            '. Additionally, here are the recommended products based on their preferences: '.json_encode($recommendedProducts).
-            '. Based on this, generate a detailed skincare routine including steps like cleansing, moisturizing, and sunscreen application.';
+        $prompt = __(
+            'skincare_test.routine_prompt',
+            [
+                'responses' => json_encode($userResponses),
+                'products' => json_encode($recommendedProducts)
+            ]
+        );
 
         $routineText = $this->recommendationService->getRoutine($prompt);
 
         $viewData = [
-            'title' => 'Your Skincare Routine',
-            'subtitle' => 'A personalized skincare routine based on your answers',
+            'title' => __('skincare_test.routine'),
+            'subtitle' => __('skincare_test.routine_desc'),
             'routine' => $routineText,
         ];
 
@@ -88,7 +92,7 @@ class SkincareTestController extends Controller
 
         if ($products->isEmpty()) {
 
-            $recommendationText = 'We currently have no products in the store to recommend. Please check back soon!';
+            $recommendationText = __('skincare_test.no_products_store');
             $explanation = '';
 
         } else {
@@ -100,7 +104,7 @@ class SkincareTestController extends Controller
             $recommendedProducts = Product::whereIn('name', $recommendedProductNames)->get();
 
             if ($recommendedProducts->isEmpty()) {
-                logger('No products found for recommendation');
+                logger(__('skincare_test.no_products'));
             } else {
                 $test->recommendations()->sync($recommendedProducts->pluck('id'));
             }

@@ -92,7 +92,7 @@
                 <!-- If the user is authenticated -->
                 <form method="POST" action="{{ route('order.store') }}" class="cart-form">
                     @csrf
-                    <label for="delivery_date" class="fw-bold mb-1">{{ _('cart.date') }}:</label>
+                    <label for="delivery_date" class="fw-bold mb-1">{{ __('cart.date') }}:</label>
                     <input type="date" name="delivery_date" id="delivery_date" class="form-control mb-2" required min="{{ now()->addDay()->toDateString() }}">
                     <button type="submit" class="btn btn-primary w-100 fw-bold">{{ __('cart.order') }}</button>
                 </form>

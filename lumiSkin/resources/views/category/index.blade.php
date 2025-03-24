@@ -24,7 +24,7 @@
                                 {{ $category->getName() }}
                             </h5>
                             <p class="text-center text-muted">
-                                {{ Str::limit($category->getDescription(), 80) }}
+                                {{ $category->getDescription() }}
                             </p>
                         </div>
                     </div>

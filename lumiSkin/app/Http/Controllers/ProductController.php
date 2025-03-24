@@ -20,8 +20,8 @@ class ProductController extends Controller
         }
 
         $viewData = [];
-        $viewData['title'] = 'List of Products';
-        $viewData['subtitle'] = 'Discover our collection';
+        $viewData['title'] = __('products.list');
+        $viewData['subtitle'] = __('products.discover');
         $viewData['products'] = $query->get();
         $viewData['categories'] = Category::all();
 
@@ -31,8 +31,8 @@ class ProductController extends Controller
     public function newest(): View
     {
         $viewData = [];
-        $viewData['title'] = 'New Arrivals';
-        $viewData['subtitle'] = 'Discover our latest products';
+        $viewData['title'] = __('products.new_arrivals');
+        $viewData['subtitle'] = __('products.discover_latest');
         $viewData['products'] = Product::orderBy('created_at', 'desc')->limit(3)->get();
 
         return view('product.newest')->with('viewData', $viewData);
@@ -43,15 +43,15 @@ class ProductController extends Controller
         $categoryId = $request->input('category_id');
 
         if (! $categoryId) {
-            return redirect()->route('product.index')->with('error', 'No category selected.');
+            return redirect()->route('product.index')->with('error', __('categories.no_selection'));
         }
 
         $category = Category::findOrFail($categoryId);
         $products = $category->products()->paginate(10);
 
         $viewData = [];
-        $viewData['title'] = 'List of Products';
-        $viewData['subtitle'] = 'Discover our collection';
+        $viewData['title'] = __('products.list');
+        $viewData['subtitle'] = __('products.discover');
         $viewData['categories'] = Category::all();
         $viewData['products'] = $products;
 
