@@ -3,7 +3,7 @@
 @section('content')
 <div class="card mb-4">
   <div class="card-header">
-    Edit Category
+    {{ __('categories.edit') }}
   </div>
   <div class="card-body">
     @if($errors->any())
@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
-            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">{{ __('app.name') }}:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input name="name" value="{{ $viewData['category']->getName() }}" type="text" class="form-control">
             </div>
@@ -28,10 +28,10 @@
         </div>
       </div>
       <div class="mb-3">
-        <label class="form-label">Description</label>
+        <label class="form-label">{{ __('app.description') }}</label>
         <textarea class="form-control" name="description" rows="3">{{ $viewData['category']->getDescription() }}</textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">{{ __('app.submit') }}</button>
     </form>
   </div>
 </div>

@@ -10,8 +10,8 @@ class CategoryController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'All Categories';
-        $viewData['subtitle'] = 'List of all categories';
+        $viewData['title'] = __('categories.all');
+        $viewData['subtitle'] = __('categories.list');
         $viewData['categories'] = Category::all();
 
         return view('category.index')->with('viewData', $viewData);

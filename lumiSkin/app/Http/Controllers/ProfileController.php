@@ -13,8 +13,8 @@ class ProfileController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['title'] = 'My Profile';
-        $viewData['subtitle'] = 'Profile details';
+        $viewData['title'] = __('profile.title');
+        $viewData['subtitle'] = __('profile.subtitle');
         $viewData['user'] = Auth::user();
         $viewData['orders'] = Order::where('user_id', Auth::id())->get();
 
@@ -23,10 +23,9 @@ class ProfileController extends Controller
 
     public function increaseBalance(Request $request): RedirectResponse
     {
-
         $user = Auth::user();
         $user->increaseBalance($request->amount);
 
-        return redirect()->route('profile.index')->with('success', 'Balance updated successfully!');
+        return redirect()->route('profile.index')->with('success', __('profile.balance_increase'));
     }
 }

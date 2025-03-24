@@ -12,8 +12,8 @@ class HomeController extends Controller
         $topProducts = Product::bestSellers();
 
         $viewData = [];
-        $viewData['title'] = 'Welcome to LumiSkin';
-        $viewData['subtitle'] = 'Our best-selling products';
+        $viewData['title'] = __('home.welcome');
+        $viewData['subtitle'] = __('home.best_sellers');
         $viewData['topProducts'] = $topProducts;
 
         return view('home.index')->with('viewData', $viewData);
