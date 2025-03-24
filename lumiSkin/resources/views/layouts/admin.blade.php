@@ -8,7 +8,7 @@
     crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link href="{{ asset('/css/admin.css') }}" rel="stylesheet" />
-  <title>@yield('title', 'Admin - Online Store')</title>
+  <title>@yield('title', __('admin.panel'))</title>
 </head>
 
 <body>
@@ -16,22 +16,22 @@
     <!-- sidebar -->
     <div class="p-3 col fixed text-white bg-dark">
       <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
-        <span class="fs-4">Admin Panel</span>
+        <span class="fs-4">{{ __('admin.panel') }}</span>
       </a>
       <hr />
       <ul class="nav flex-column">
-        <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- Admin - Home</a></li>
-        <li><a href="{{ route('admin.product.index') }}" class="nav-link text-white">- Admin - Products</a></li>
-        <li><a href="{{ route('admin.category.index') }}" class="nav-link text-white">- Admin - Categories</a></li>
+        <li><a href="{{ route('admin.home.index') }}" class="nav-link text-white">- {{ __('admin.home') }}</a></li>
+        <li><a href="{{ route('admin.product.index') }}" class="nav-link text-white">- {{ __('admin.products') }}</a></li>
+        <li><a href="{{ route('admin.category.index') }}" class="nav-link text-white">- {{ __('admin.categories') }}</a></li>
         <li>
-          <a href="{{ route('home.index') }}" class="mt-2 btn bg-primary text-white">Go back to the home page</a>
+          <a href="{{ route('home.index') }}" class="mt-2 btn bg-primary text-white">{{ __('admin.back') }}</a>
         </li>
       </ul>
     </div>
     <!-- sidebar -->
     <div class="col content-grey">
       <nav class="p-3 shadow text-end">
-        <span class="profile-font">Admin</span>
+        <span class="profile-font">{{ __('admin.admin') }}</span>
         <img class="img-profile rounded-circle" src="{{ asset('/img/undraw_profile.svg') }}">
       </nav>
 

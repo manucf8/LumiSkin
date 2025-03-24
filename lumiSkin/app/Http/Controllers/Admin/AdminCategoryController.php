@@ -11,7 +11,7 @@ class AdminCategoryController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData['title'] = 'Admin Page - Categories - Online Store';
+        $viewData['title'] = __('admin.categories');
         $viewData['categories'] = Category::all();
 
         return view('admin.category.index')->with('viewData', $viewData);
@@ -27,7 +27,7 @@ class AdminCategoryController extends Controller
 
         $newCategory->save();
 
-        return back()->with('success', 'Category created successfully.');
+        return back()->with('success', __('categories.create_success'));
     }
 
     public function delete($id)
@@ -40,7 +40,7 @@ class AdminCategoryController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData['title'] = 'Admin Page - Edit Category - Online Store';
+        $viewData['title'] = __('admin.edit_categories');
         $viewData['category'] = Category::findOrFail($id);
         $viewData['categories'] = Category::all();
 

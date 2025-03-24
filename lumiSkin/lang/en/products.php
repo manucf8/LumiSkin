@@ -16,4 +16,5 @@ return [
     'description' => 'Description',
     'categories' => 'Categories',
     'brand' => 'Brand',
+    'create_success' => 'Product created successfully.',
 ];

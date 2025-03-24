@@ -7,38 +7,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-    <title>@yield('title', 'LumiSkin')</title>
+    <title>@yield('title', __('app.lumiskin'))</title>
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home.index') }}">LumiSkin</a>
+            <a class="navbar-brand" href="{{ route('home.index') }}">{{ __('app.lumiskin') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">Skincare test</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">{{ __('app.home') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">{{ __('app.products') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">{{ __('app.skincare_test') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">{{ __('app.profile') }}</a></li>
 
                     @guest
-                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
-                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link active" href="{{ route('login') }}">{{ __('auth.login') }}</a>
+                    <a class="nav-link active" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                     @else
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                         <a role="button" class="nav-link active"
-                            onclick="document.getElementById('logout').submit();">Logout</a>
+                            onclick="document.getElementById('logout').submit();">{{ __('auth.logout') }}</a>
                         @csrf
                     </form>
                     @endguest
 
                     <li class="nav-item">
                         <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                            🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
+                            {{ __('app.cart') }} <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
                         </a>
                     </li>
                 </ul>
@@ -50,7 +50,7 @@
     <!-- Offcanvas Sidebar - Shopping Cart -->
     <div class="offcanvas offcanvas-end p-3 bg-light shadow-lg" tabindex="-1" id="cartSidebar">
         <div class="offcanvas-header">
-            <h5 class="fw-bold text-primary">🛍️ Shopping Cart</h5>
+            <h5 class="fw-bold text-primary">{{ __('app.shopping_cart') }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
@@ -74,7 +74,7 @@
                     <!-- Remove Button -->
                     <form method="POST" action="{{ route('cart.remove', ['id' => $id]) }}" class="cart-form">
                         @csrf
-                        <button class="btn btn-outline-danger btn-sm ms-2">X</button>
+                        <button class="btn btn-outline-danger btn-sm ms-2">{{ __('app.remove') }}</button>
                     </form>
                 </li>
                 @endforeach
@@ -83,7 +83,7 @@
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
                 <h5 class="fw-bold text-success">
-                    Total: ${{ number_format(session('cart_total', 0), 0, ',', '.') }}</h5>
+                    {{ __('cart.total') }}: ${{ number_format(session('cart_total', 0), 0, ',', '.') }}</h5>
             </div>
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">
@@ -92,28 +92,28 @@
                 <!-- If the user is authenticated -->
                 <form method="POST" action="{{ route('order.store') }}" class="cart-form">
                     @csrf
-                    <label for="delivery_date" class="fw-bold mb-1">Choose delivery date:</label>
+                    <label for="delivery_date" class="fw-bold mb-1">{{ _('cart.date') }}:</label>
                     <input type="date" name="delivery_date" id="delivery_date" class="form-control mb-2" required min="{{ now()->addDay()->toDateString() }}">
-                    <button type="submit" class="btn btn-primary w-100 fw-bold">🛒 Place Order</button>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">{{ __('cart.order') }}</button>
                 </form>
                 @endauth
 
                 @guest
                 <!-- If the user is NOT authenticated -->
                 <a href="{{ route('login') }}" class="btn btn-warning w-100 fw-bold"
-                    onclick="alert('Please login before placing an order.')">🔐 Login to Place Order</a>
+                    onclick="alert( __('cart.login_alert') )">{{ __('cart.login') }}</a>
                 @endguest
 
                 <!-- Clear Cart Button -->
                 <form method="POST" action="{{ route('cart.clear') }}" class="cart-form">
                     @csrf
-                    <button class="btn btn-danger w-100 fw-bold">🗑️ Clear Cart</button>
+                    <button class="btn btn-danger w-100 fw-bold">{{ __('cart.clear') }}</button>
                 </form>
             </div>
 
 
             @else
-            <p class="text-center text-muted fs-5">Your cart is empty.</p>
+            <p class="text-center text-muted fs-5">{{ __('cart.empty') }}</p>
             @endif
         </div>
     </div>
@@ -125,10 +125,10 @@
     <!-- Footer -->
     <footer class="footer text-center">
         <div class="container">
-            <p>© 2025 LumiSkin - All rights reserved.</p>
-            <a href="#">Terms and Conditions</a> | <a href="#">Privacy Policy</a>
+            <p>{{ __('app.copyright') }}</p>
+            <a href="#">{{ __('app.terms') }}</a> | <a href="#">{{ __('app.privacy') }}</a>
             <div class="mt-2">
-                <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">TikTok</a>
+                <a href="#">{{ __('app.instagram') }}</a> | <a href="#">{{ __('app.facebook') }}</a> | <a href="#">{{ __('app.tiktok') }}</a>
             </div>
         </div>
     </footer>

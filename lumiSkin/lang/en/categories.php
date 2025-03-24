@@ -8,4 +8,6 @@ return [
     'edit' => 'Edit Category',
     'create' => 'Create Categories',
     'manage' => 'Manage Categories',
+    'create_succes' => 'Category created successfully.',
+    'info' => ' - Category information',
 ];

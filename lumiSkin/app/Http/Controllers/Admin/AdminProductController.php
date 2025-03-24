@@ -13,7 +13,7 @@ class AdminProductController extends Controller
     public function index()
     {
         $viewData = [];
-        $viewData['title'] = 'Admin Page - Products - Online Store';
+        $viewData['title'] = __('admin.products');
         $viewData['products'] = Product::all();
         $viewData['categories'] = Category::all();
 
@@ -45,7 +45,7 @@ class AdminProductController extends Controller
             $newProduct->save();
         }
 
-        return back()->with('success', 'Product created successfully.');
+        return back()->with('success', __('products.create_success'));
     }
 
     public function delete($id)
@@ -58,7 +58,7 @@ class AdminProductController extends Controller
     public function edit($id)
     {
         $viewData = [];
-        $viewData['title'] = 'Admin Page - Edit Product - Online Store';
+        $viewData['title'] = __('admin.edit_products');
         $viewData['product'] = Product::findOrFail($id);
         $viewData['categories'] = Category::all();
 
