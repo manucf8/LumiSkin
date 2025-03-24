@@ -3,28 +3,41 @@
 @section('title', $viewData['title'])
 
 @section('content')
-    <h1>{{ $viewData['title'] }}</h1>
-    <h2>{{ $viewData['subtitle'] }}</h2>
+<div class="container my-5">
+    <div class="card p-5">
+        <h1 class="text-center mb-3">{{ $viewData['title'] }}</h1>
+        <h2 class="text-center mb-4">{{ $viewData['subtitle'] }}</h2>
 
-    @if ($viewData['recommendedProducts']->isEmpty())
-        <p>{{ $viewData['noProductsMessage'] }}</p>
-    @else
-        <ul>
-            @foreach ($viewData['recommendedProducts'] as $product)
-                <li>
-                    <strong>{{ $product->name }}</strong> ({{ $product->brand }}) - {{ $product->description }}
+        @if ($viewData['recommendedProducts']->isEmpty())
+        <p class="text-center">{{ $viewData['noProductsMessage'] }}</p>
+        @else
+        <div class="mb-4">
+            <ul class="list-group">
+                @foreach ($viewData['recommendedProducts'] as $product)
+                <li class="list-group-item">
+                    <strong>{{ $product->name }}</strong> ({{ $product->brand }}) – {{ $product->description }}
                 </li>
-            @endforeach
-        </ul>
+                @endforeach
+            </ul>
+        </div>
 
         @if (!empty($viewData['explanation']))
-            <p>{{ $viewData['explanation'] }}</p>
+        <div class="alert alert-info">
+            {{ $viewData['explanation'] }}
+        </div>
         @endif
 
-        <a href="{{ route('skincare_test.routine', ['test' => $viewData['test']->id]) }}" class="btn btn-primary">
-            Generate Skincare Routine
-        </a>
-    @endif
+        <div class="text-center mt-4">
+            <a href="{{ route('skincare_test.routine', ['test' => $viewData['test']->id]) }}"
+                class="btn btn-outline-primary">
+                Generate Skincare Routine
+            </a>
+        </div>
+        @endif
 
-    <a href="{{ route('skincare_test.index') }}">Back to the Test</a>
+        <div class="text-center mt-3">
+            <a href="{{ route('skincare_test.index') }}" class="btn btn-link">Back to the Test</a>
+        </div>
+    </div>
+</div>
 @endsection

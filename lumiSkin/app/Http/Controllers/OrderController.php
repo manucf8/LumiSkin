@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Response;
+
 
 class OrderController extends Controller
 {
@@ -66,5 +69,19 @@ class OrderController extends Controller
         $viewData['order'] = $order;
 
         return view('order.index')->with('viewData', $viewData);
+    }
+
+    public function downloadPdf($id): Response
+    {
+        $order = Order::with(['user', 'items.product'])->findOrFail($id);
+
+        $viewData = [
+            'title' => 'Order Summary',
+            'subtitle' => 'Your order has been processed successfully!',
+            'order' => $order,
+        ];
+
+        $pdf = Pdf::loadView('order.pdf', ['viewData' => $viewData]);
+        return $pdf->download('order_' . $order->id . '.pdf');
     }
 }

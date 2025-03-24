@@ -52,6 +52,9 @@
         </div>
 
         <div class="text-center mt-4">
+            <a href="{{ route('order.pdf', ['id' => $viewData['order']->getId()]) }}" class="btn btn-outline-primary">
+                Download PDF
+            </a>
             <a href="/" class="btn btn-outline-primary">← Back to Store</a>
         </div>
     </div>
