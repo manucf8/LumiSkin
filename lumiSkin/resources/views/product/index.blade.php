@@ -6,25 +6,25 @@
 @section('content')
 
 <div class="container mt-4">
-    <p>Search by name</p>
+    <p>{{ __('products.search_name') }}</p>
     <form method="GET" action="{{ route('product.index') }}" class="mb-4">
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Search products..."
+            <input type="text" name="search" class="form-control" placeholder="{{ __('products.search_products') }}"
                 value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary">{{ __('products.search') }}</button>
         </div>
     </form>
 
-    <p>Or search by category</p>
+    <p>{{ __('products.search_category') }}</p>
     <form action="{{ route('product.searchByCategory') }}" method="GET">
         <div class="input-group">
             <select name="category_id" class="form-select">
-                <option value="">Select a Category</option>
+                <option value="">{{ __('categories.select') }}</option>
                 @foreach($viewData['categories'] as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary">{{ __('products.search') }}</button>
         </div>
     </form>
 </div>
@@ -44,7 +44,7 @@
                     <form method="POST" action="{{ route('cart.add') }}" class="mt-auto">
                         @csrf
                         <input type="hidden" name="id" value="{{ $product->id }}">
-                        <button type="submit" class="btn btn-primary w-100">🛒 Add to Cart</button>
+                        <button type="submit" class="btn btn-primary w-100">{{ __('cart.add') }}</button>
                     </form>
                 </div>
             </div>
@@ -52,7 +52,7 @@
         @endforeach
         @else
         <div class="col-12 text-center">
-            <p class="text-muted">No products found.</p>
+            <p class="text-muted">{{ __('products.not_found') }}</p>
         </div>
         @endif
     </div>

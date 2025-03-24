@@ -22,5 +22,5 @@ return [
     'instagram' => 'Instagram',
     'facebook' => 'Facebook',
     'tiktok' => 'TikTok',
-    
+    'back' => '← Back to Store',
 ];

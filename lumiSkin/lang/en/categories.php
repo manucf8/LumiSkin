@@ -10,4 +10,5 @@ return [
     'manage' => 'Manage Categories',
     'create_succes' => 'Category created successfully.',
     'info' => ' - Category information',
+    'select' => 'Select a category',
 ];
