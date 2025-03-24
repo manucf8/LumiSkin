@@ -19,29 +19,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                  <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">Skincare test</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">Profile</a></li>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">Skincare test</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">Profile</a></li>
 
-                  @guest 
-                  <a class="nav-link active" href="{{ route('login') }}">Login</a> 
-                  <a class="nav-link active" href="{{ route('register') }}">Register</a> 
-                  @else 
-                  <form id="logout" action="{{ route('logout') }}" method="POST"> 
-                      <a role="button" class="nav-link active" 
-                        onclick="document.getElementById('logout').submit();">Logout</a> 
-                      @csrf 
-                  </form> 
-                  @endguest
+                    @guest
+                    <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link active" href="{{ route('register') }}">Register</a>
+                    @else
+                    <form id="logout" action="{{ route('logout') }}" method="POST">
+                        <a role="button" class="nav-link active"
+                            onclick="document.getElementById('logout').submit();">Logout</a>
+                        @csrf
+                    </form>
+                    @endguest
 
-                  <li class="nav-item">
-                      <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                          🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
-                      </a>
-                  </li>
-              </ul>
+                    <li class="nav-item">
+                        <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+                            🛒 <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -60,7 +60,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm border-0 rounded">
                     <div>
                         <strong class="text-dark">{{ $item['name'] }}</strong><br>
-                        <small class="text-muted">${{ $item['price'] }}</small>
+                        <small class="text-muted">${{ number_format($item['price'], 0, ',', '.') }}</small>
                     </div>
 
                     <!-- Quantity Input -->
@@ -82,14 +82,14 @@
 
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
-                <h5 class="fw-bold text-success">Total: ${{ session('cart_total', 0) }}</h5>
+                <h5 class="fw-bold text-success">
+                    Total: ${{ number_format(session('cart_total', 0), 0, ',', '.') }}</h5>
             </div>
-
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">
                 <!-- Proceed to Checkout Form -->
                 @auth
-                <!-- Si el usuario está autenticado -->
+                <!-- If the user is authenticated -->
                 <form method="POST" action="{{ route('order.store') }}" class="cart-form">
                     @csrf
                     <label for="delivery_date" class="fw-bold mb-1">Choose delivery date:</label>
@@ -99,11 +99,10 @@
                 @endauth
 
                 @guest
-                <!-- Si el usuario NO está autenticado -->
+                <!-- If the user is NOT authenticated -->
                 <a href="{{ route('login') }}" class="btn btn-warning w-100 fw-bold"
                     onclick="alert('Please login before placing an order.')">🔐 Login to Place Order</a>
                 @endguest
-
 
                 <!-- Clear Cart Button -->
                 <form method="POST" action="{{ route('cart.clear') }}" class="cart-form">

@@ -27,6 +27,7 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
 Route::controller(App\Http\Controllers\OrderController::class)->group(function (): void {
     Route::post('/orders', 'store')->name('order.store');
     Route::get('/orders/{id}', 'index')->name('order.index');
+    Route::get('/orders/{id}/pdf', 'downloadPdf')->name('order.pdf');
 });
 
 Route::middleware('admin')->group(function (): void {
@@ -62,7 +63,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/skincare-recommendation/{test}', 'getRecommendation')->name('skincare_test.recommendation');
         Route::get('/skincare-test/{test}/routine', 'generateRoutine')->name('skincare_test.routine');
     });
-
 });
 
 Auth::routes();
