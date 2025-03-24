@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Services\ChatGPTService;
 
 Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
     Route::get('/', 'index')->name('home.index');

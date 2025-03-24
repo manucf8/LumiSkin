@@ -9,15 +9,15 @@
     <form action="{{ route('skincare_test.recommendation') }}" method="POST">
         @csrf
 
-        <label for="skin_type">Skin Type:</label>
-        <input type="text" id="skin_type" name="skin_type" value="combination" required><br><br>
+        @foreach ($viewData['questions'] as $question)
+            <label>{{ $question['question'] }}</label><br>
+            <select name="{{ $question['name'] }}" required>
+                @foreach ($question['options'] as $option)
+                    <option value="{{ $option }}">{{ $option }}</option>
+                @endforeach
+            </select><br><br>
+        @endforeach
 
-        <label for="tone">Skin Tone:</label>
-        <input type="text" id="tone" name="tone" value="light" required><br><br>
-
-        <label for="preferences">Preferences:</label>
-        <input type="text" id="preferences" name="preferences" value="cruelty-free" required><br><br>
-
-        <button type="submit">Submit</button>
+        <button type="submit">Enviar</button>
     </form>
 @endsection

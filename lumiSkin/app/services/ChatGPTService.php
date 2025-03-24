@@ -14,10 +14,8 @@ class ChatGPTService
         $this->apiKey = env('OPENAI_API_KEY');
     }
 
-    public function getRecommendationFromProducts($userResponses)
+    public function getRecommendationFromProducts($userResponses, $products): mixed
     {
-        $products = Product::all(['name', 'description', 'brand', 'price']);
-
         $prompt = "Eres un experto en maquillaje. A continuación te paso las respuestas del usuario: " . json_encode($userResponses) . 
           ". Y estos son los productos disponibles en la tienda (no puedes inventar otros productos): " . json_encode($products) . 
           ". Tu tarea es recomendarle SOLO productos de la lista anterior, seleccionando los más adecuados según su tipo de piel, tono y preferencias. 
