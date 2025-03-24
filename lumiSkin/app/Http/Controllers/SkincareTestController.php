@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Services\ChatGPTService;
-use Illuminate\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SkincareTestController extends Controller
 {
     protected $chatGPTService;
 
     public function index(): View
-    {   
+    {
         $viewData = [];
         $viewData['title'] = 'Skincare Recommendation Test';
         $viewData['subtitle'] = 'Fill out the form to get your personalized skincare recommendation';
@@ -47,5 +46,4 @@ class SkincareTestController extends Controller
 
         return view('skincare_test.recommendation')->with('viewData', $viewData);
     }
-
 }

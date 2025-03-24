@@ -59,5 +59,4 @@ class SkincareTest extends Model
     {
         return $this->belongsToMany(Product::class);
     }
-
 }

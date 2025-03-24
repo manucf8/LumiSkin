@@ -133,4 +133,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function increaseBalance($amount)
+    {
+        $this->attributes['balance'] += $amount;
+        $this->save();
+    }
+
+    public function decreaseBalance(float $amount): void
+    {
+        $this->attributes['balance'] -= $amount;
+        $this->save();
+    }
 }

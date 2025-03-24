@@ -34,7 +34,7 @@
         @foreach ($viewData["products"] as $product)
         <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card h-100 shadow-sm">
-                <img src="{{ asset('images/' . 'default.jpg') }}" class="card-img-top" alt="{{ $product['name'] }}">
+            <img src="{{ asset('/storage/'.$product->getImage()) }}" class="card-img-top img-card"> 
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-center text-primary">{{ $product->getName() }}</h5>
                     <p class="card-text text-muted text-center">{{ Str::limit($product->getDescription(), 60) }}</p>

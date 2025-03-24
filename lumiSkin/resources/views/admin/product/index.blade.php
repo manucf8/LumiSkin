@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('title', $viewData["title"])
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="card mb-4">
   <div class="card-header">
     Create Products
@@ -56,13 +61,18 @@
         <input type="text" class="form-control" name="brand" value="{{ old('brand') }}">
       </div>
       <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select class="form-control" name="category">
+      <label class="form-label">Categories</label>
+      <div>
           @foreach($viewData['categories'] as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}" id="category-{{ $category->id }}">
+                  <label class="form-check-label" for="category-{{ $category->id }}">
+                      {{ $category->name }}
+                  </label>
+              </div>
           @endforeach
-        </select>
       </div>
+    </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

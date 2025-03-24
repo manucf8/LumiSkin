@@ -37,6 +37,8 @@ class Product extends Model
             'image' => 'image|mimes:jpg,jepg,png',
             'brand' => 'required|max:100',
             'price' => 'required|min:1',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ]);
     }
 
@@ -53,11 +55,6 @@ class Product extends Model
     public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
-    }
-
-    public function setImage($image): void
-    {
-        $this->image = $image;
     }
 
     public function getDescription(): string
@@ -118,7 +115,7 @@ class Product extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_product');
     }
 
     // Relationship Items
@@ -147,14 +144,14 @@ class Product extends Model
     {
         $cart = session('cart', []);
 
-        return array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
+        return array_sum(array_map(fn ($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
     }
 
     public static function calculateTotalQuantity(): int
     {
         $cart = session('cart', []);
 
-        return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
+        return array_sum(array_map(fn ($item) => $item['quantity'] ?? 1, $cart));
     }
 
     public static function bestSellers(int $limit = 4): Collection
