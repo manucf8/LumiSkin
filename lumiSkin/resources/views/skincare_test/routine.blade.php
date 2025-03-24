@@ -3,10 +3,16 @@
 @section('title', $viewData['title'])
 
 @section('content')
-    <h1>{{ $viewData['title'] }}</h1>
-    <h2>{{ $viewData['subtitle'] }}</h2>
+<div class="container my-5">
+    <div class="card p-5">
+        <h1 class="text-center mb-3">{{ $viewData['title'] }}</h1>
+        <h2 class="text-center mb-4">{{ $viewData['subtitle'] }}</h2>
 
-    <p>{{ $viewData['routine'] }}</p>
+        <p class="text-justify">{{ $viewData['routine'] }}</p>
 
-    <a href="{{ route('skincare_test.index') }}">Back to the Test</a>
+        <div class="text-center mt-4">
+            <a href="{{ route('skincare_test.index') }}" class="btn btn-link">Back to the Test</a>
+        </div>
+    </div>
+</div>
 @endsection

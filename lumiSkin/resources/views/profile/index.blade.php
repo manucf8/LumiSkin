@@ -5,9 +5,9 @@
 
 @section('content')
 @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
 @endif
 
 <div class="card">
@@ -21,8 +21,8 @@
 
         <form method="POST" action="{{ route('profile.increaseBalance') }}">
             @csrf
-            <input type="hidden" name="amount" value="50">
-            <button type="submit" class="btn btn-success mt-2">Add $50 to Balance</button>
+            <input type="hidden" name="amount" value="50000">
+            <button type="submit" class="btn btn-success mt-2">Add $50.000 to Balance</button>
         </form>
 
         <p><strong>Orders:</strong></p>
@@ -36,16 +36,16 @@
             </thead>
             <tbody>
                 @foreach($viewData['orders'] as $order)
-                    <tr>
-                        <td>{{ $order->getId() }}</td>
-                        <td>${{ number_format($order->getTotal(), 2) }}</td>
-                        <td>{{ $order->getCreatedAt() }}</td>
-                    </tr>
+                <tr>
+                    <td>{{ $order->getId() }}</td>
+                    <td>${{ number_format($order->getTotal(), 2) }}</td>
+                    <td>{{ $order->getCreatedAt() }}</td>
+                </tr>
                 @endforeach
             </tbody>
     </div>
 </div>
-</table> 
-    </div> 
-</div> 
+</table>
+</div>
+</div>
 @endsection
