@@ -22,8 +22,8 @@
               <ul class="navbar-nav ms-auto">
                   <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
                   <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">Products</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{ route('category.index') }}">Categories</a></li>
                   <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">Skincare test</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">Profile</a></li>
 
                   @guest 
                   <a class="nav-link active" href="{{ route('login') }}">Login</a> 
@@ -90,7 +90,7 @@
                 <!-- Proceed to Checkout Form -->
                 @auth
                 <!-- Si el usuario está autenticado -->
-                <form method="POST" action="{{ route('orders.store') }}" class="cart-form">
+                <form method="POST" action="{{ route('order.store') }}" class="cart-form">
                     @csrf
                     <label for="delivery_date" class="fw-bold mb-1">Choose delivery date:</label>
                     <input type="date" name="delivery_date" id="delivery_date" class="form-control mb-2" required min="{{ now()->addDay()->toDateString() }}">

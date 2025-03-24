@@ -14,10 +14,9 @@
     </ul>
     @endif
 
-    <form method="POST" action="{{ route('admin.product.update', ['id'=> $viewData['product']->getId()]) }}"
-      enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.product.update', ['id'=> $viewData['product']->getId()]) }}" enctype="multipart/form-data">
       @csrf
-      @method('PUT')
+      @method('PUT') 
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
@@ -51,10 +50,31 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Description</label>
-        <textarea class="form-control" name="description"
-          rows="3">{{ $viewData['product']->getDescription() }}</textarea>
+        <textarea class="form-control" name="description" rows="3">{{ $viewData['product']->getDescription() }}</textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Edit</button>
+      <div class="mb-3">
+        <label class="form-label">Brand</label>
+        <input type="text" class="form-control" name="brand" value="{{ $viewData['product']->getBrand() }}">
+      </div>
+      <div class="mb-3">
+    <label class="form-label">Categories</label>
+    @foreach($viewData['categories'] as $category)
+        <div class="form-check">
+            <input 
+                class="form-check-input" 
+                type="checkbox" 
+                name="categories[]" 
+                value="{{ $category->id }}" 
+                id="category-{{ $category->id }}" 
+                {{ $viewData['product']->categories->contains($category->id) ? 'checked' : '' }}>
+            <label class="form-check-label" for="category-{{ $category->id }}">
+                {{ $category->name }}
+            </label>
+        </div>
+    @endforeach
+</div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </div>

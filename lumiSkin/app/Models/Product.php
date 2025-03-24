@@ -37,6 +37,8 @@ class Product extends Model
             'image' => 'image|mimes:jpg,jepg,png',
             'brand' => 'required|max:100',
             'price' => 'required|min:1',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ]);
     }
 
@@ -113,7 +115,7 @@ class Product extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_product');
     }
 
     // Relationship Items

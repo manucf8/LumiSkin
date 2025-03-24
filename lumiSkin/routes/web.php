@@ -22,15 +22,11 @@ Route::controller(App\Http\Controllers\CartController::class)->group(function ()
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {
     Route::get('/categories', 'index')->name('category.index');
-    Route::get('/categories/create', 'create')->name('category.create');
-    Route::get('/categories/{id}', 'show')->name('category.show');
-    Route::post('/categories/store', 'store')->name('category.store');
-    Route::delete('/categories/{id}/delete', 'delete')->name('category.delete');
 });
 
 Route::controller(App\Http\Controllers\OrderController::class)->group(function (): void {
-    Route::post('/orders', 'store')->name('orders.store');
-    Route::get('/orders/{id}', 'index')->name('orders.index');
+    Route::post('/orders', 'store')->name('order.store');
+    Route::get('/orders/{id}', 'index')->name('order.index');
 });
 
 Route::middleware('admin')->group(function (): void {
@@ -45,12 +41,28 @@ Route::middleware('admin')->group(function (): void {
         Route::get('/admin/products/{id}/edit', 'edit')->name('admin.product.edit');
         Route::put('/admin/products/{id}/update', 'update')->name('admin.product.update');
     });
+
+    Route::controller(App\Http\Controllers\Admin\AdminCategoryController::class)->group(function (): void {
+        Route::get('/admin/categories', 'index')->name('admin.category.index');
+        Route::post('/admin/categories/store', 'store')->name('admin.category.store');
+        Route::delete('/admin/categories/{id}/delete', 'delete')->name('admin.category.delete');
+        Route::get('/admin/categories/{id}/edit', 'edit')->name('admin.category.edit');
+        Route::put('/admin/categories/{id}/update', 'update')->name('admin.category.update');
+    });
 });
 
 Route::controller(App\Http\Controllers\SkincareTestController::class)->group(function (): void {
     Route::get('/skincare-test', 'index')->name('skincare_test.index');
     Route::post('/skincare-test', 'store')->name('skincare_test.store');
     Route::get('/skincare-recommendation/{test}', 'getRecommendation')->name('skincare_test.recommendation');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::controller(App\Http\Controllers\ProfileController::class)->group(function (): void {
+        Route::get('/profile', 'index')->name('profile.index');
+        Route::post('/profile/increaseBalance', 'increaseBalance')->name('profile.increaseBalance');
+    });
+
 });
 
 Auth::routes();

@@ -30,9 +30,10 @@ class AdminProductController extends Controller
         $newProduct->setPrice($request->input('price'));
         $newProduct->setBrand($request->input('brand'));
         $newProduct->setImage('game.png');
+
         $newProduct->save();
 
-        $newProduct->categories()->attach($request->input('category'));
+        $newProduct->categories()->attach($request->input('categories'));
 
         if ($request->hasFile('image')) {
             $imageName = $newProduct->getId().'.'.$request->file('image')->extension();
@@ -44,7 +45,7 @@ class AdminProductController extends Controller
             $newProduct->save();
         }
 
-        return back();
+        return back()->with('success', 'Product created successfully.');
     }
 
     public function delete($id)
@@ -59,6 +60,7 @@ class AdminProductController extends Controller
         $viewData = [];
         $viewData['title'] = 'Admin Page - Edit Product - Online Store';
         $viewData['product'] = Product::findOrFail($id);
+        $viewData['categories'] = Category::all();
 
         return view('admin.product.edit')->with('viewData', $viewData);
     }
@@ -71,6 +73,9 @@ class AdminProductController extends Controller
         $product->setName($request->input('name'));
         $product->setDescription($request->input('description'));
         $product->setPrice($request->input('price'));
+        $product->setBrand($request->input('brand'));
+
+        $product->categories()->sync($request->input('categories', []));
 
         if ($request->hasFile('image')) {
             $imageName = $product->getId().'.'.$request->file('image')->extension();

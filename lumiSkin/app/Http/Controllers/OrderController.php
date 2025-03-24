@@ -20,20 +20,16 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Cart is empty');
         }
 
-        // Calculate total
         $total = Product::calculateTotal($cart);
 
-        // Validate delivery date
         Order::validate($request);
 
-        // Create order with user_id
         $order = Order::create([
             'user_id' => Auth::id(),
             'total' => $total,
             'delivery_date' => $request->delivery_date,
         ]);
 
-        // Add items to the order
         foreach ($cart as $productId => $details) {
             Item::create([
                 'product_id' => $productId,
@@ -44,12 +40,19 @@ class OrderController extends Controller
             ]);
         }
 
-        // Clear cart
+        $user = Auth::user();
+
+        if ($user->balance < $total) {
+            return redirect()->back()->with('error', 'Insufficient balance');
+        }
+
+        $user->decreaseBalance($total);
+
         session()->forget('cart');
         session()->forget('cart_total');
         session()->forget('cart_quantity');
 
-        return redirect()->route('orders.index', $order->id)
+        return redirect()->route('order.index', $order->id)
             ->with('success', 'Order created successfully!');
     }
 
@@ -62,6 +65,6 @@ class OrderController extends Controller
         $viewData['subtitle'] = 'Your completed purchase';
         $viewData['order'] = $order;
 
-        return view('orders.index')->with('viewData', $viewData);
+        return view('order.index')->with('viewData', $viewData);
     }
 }
