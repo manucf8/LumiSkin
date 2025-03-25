@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,27 +57,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getId()
+    public function getId(): int
     {
         return $this->attributes['id'];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->attributes['name'];
     }
 
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->attributes['email'];
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->attributes['email'] = $email;
     }
@@ -88,27 +87,27 @@ class User extends Authenticatable
         return $this->attributes['password'];
     }
 
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->attributes['password'] = $password;
     }
 
-    public function getRole()
+    public function getRole(): string
     {
         return $this->attributes['role'];
     }
 
-    public function setRole($role)
+    public function setRole(string $role): void
     {
         $this->attributes['role'] = $role;
     }
 
-    public function getBalance()
+    public function getBalance(): int
     {
         return $this->attributes['balance'];
     }
 
-    public function setBalance($balance): void
+    public function setBalance(int $balance): void
     {
         $this->attributes['balance'] = $balance;
     }
@@ -133,13 +132,13 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function increaseBalance($amount)
+    public function increaseBalance(int $amount): void
     {
         $this->attributes['balance'] += $amount;
         $this->save();
     }
 
-    public function decreaseBalance(float $amount): void
+    public function decreaseBalance(int $amount): void
     {
         $this->attributes['balance'] -= $amount;
         $this->save();

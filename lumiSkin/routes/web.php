@@ -52,7 +52,7 @@ Route::middleware('admin')->group(function (): void {
     });
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function (): void {
     Route::controller(App\Http\Controllers\ProfileController::class)->group(function (): void {
         Route::get('/profile', 'index')->name('profile.index');
         Route::post('/profile/increaseBalance', 'increaseBalance')->name('profile.increaseBalance');

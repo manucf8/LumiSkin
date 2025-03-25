@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 
 class Order extends Model
 {
@@ -25,11 +26,10 @@ class Order extends Model
      */
     protected $fillable = ['user_id', 'total', 'delivery_date'];
 
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'delivery_date' => 'required|date|after:today',
-            // 'user_id' => 'required|exists:users,id'
         ]);
     }
 
@@ -75,9 +75,9 @@ class Order extends Model
         return $this->attributes['user_id'];
     }
 
-    public function setUserId(int $uId): void
+    public function setUserId(int $userID): void
     {
-        $this->attributes['user_id'] = $uId;
+        $this->attributes['user_id'] = $userID;
     }
 
     public function getCustomerName(): string

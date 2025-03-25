@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('items', function (Blueprint $table) {
             $table->foreignId('order_id')
@@ -24,7 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('items', function (Blueprint $table) {
             $table->dropUnique(['order_id', 'product_id']);

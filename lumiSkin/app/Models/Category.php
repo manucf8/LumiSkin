@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class Category extends Model
@@ -19,7 +20,7 @@ class Category extends Model
      * $this->attributes['updated_at'] - timestamp - contains the category update date
      * $this->products - Product[] - contains the associated products
      */
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -37,7 +38,7 @@ class Category extends Model
         return $this->attributes['name'];
     }
 
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
     }
@@ -47,7 +48,7 @@ class Category extends Model
         return Str::limit($this->attributes['description'], 90);
     }
 
-    public function setDescription($description): void
+    public function setDescription(string $description): void
     {
         $this->attributes['description'] = $description;
     }

@@ -23,6 +23,11 @@ class OrderController extends Controller
         }
 
         $total = Product::calculateTotal($cart);
+        $user = Auth::user();
+
+        if ($user->balance < $total) {
+            return redirect()->back()->with('error', __('profile.insufficient_balance'));
+        }
 
         Order::validate($request);
 
@@ -42,23 +47,16 @@ class OrderController extends Controller
             ]);
         }
 
-        $user = Auth::user();
-
-        if ($user->balance < $total) {
-            return redirect()->back()->with('error', __('profile.insufficient_balance'));
-        }
-
         $user->decreaseBalance($total);
 
         session()->forget('cart');
         session()->forget('cart_total');
         session()->forget('cart_quantity');
 
-        return redirect()->route('order.index', $order->id)
-            ->with('success', __('orders.create_success'));
+        return redirect()->route('order.index', $order->id)->with('success', __('orders.create_success'));
     }
 
-    public function index($id): View
+    public function index(int $id): View
     {
         $order = Order::with('items.product')->findOrFail($id);
 
@@ -70,7 +68,7 @@ class OrderController extends Controller
         return view('order.index')->with('viewData', $viewData);
     }
 
-    public function downloadPdf($id): Response
+    public function downloadPdf(int $id): Response
     {
         $order = Order::with(['user', 'items.product'])->findOrFail($id);
 

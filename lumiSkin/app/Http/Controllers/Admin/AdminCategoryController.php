@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AdminCategoryController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $viewData = [];
         $viewData['title'] = __('admin.categories');
@@ -17,7 +19,7 @@ class AdminCategoryController extends Controller
         return view('admin.category.index')->with('viewData', $viewData);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         Category::validate($request);
 
@@ -30,14 +32,14 @@ class AdminCategoryController extends Controller
         return back()->with('success', __('categories.create_success'));
     }
 
-    public function delete($id)
+    public function delete(int $id): RedirectResponse
     {
         Category::destroy($id);
 
         return back();
     }
 
-    public function edit($id)
+    public function edit(int $id): View
     {
         $viewData = [];
         $viewData['title'] = __('admin.edit_categories');
@@ -47,7 +49,7 @@ class AdminCategoryController extends Controller
         return view('admin.category.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): RedirectResponse
     {
         Category::validate($request);
 

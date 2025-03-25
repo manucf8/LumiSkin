@@ -12,20 +12,16 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(RecommendationServiceInterface::class, ChatGPTService::class);
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Route::aliasMiddleware('admin', AdminAuthMiddleware::class);
     }
