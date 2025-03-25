@@ -22,7 +22,7 @@ class OrderController extends Controller
             return redirect()->back()->with('error', __('cart.empty'));
         }
 
-        $total = Product::calculateTotal($cart);
+        $total = Product::calculateTotal();
         $user = Auth::user();
 
         if ($user->balance < $total) {
