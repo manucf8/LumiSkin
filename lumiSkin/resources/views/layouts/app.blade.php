@@ -60,7 +60,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm border-0 rounded">
                     <div>
                         <strong class="text-dark">{{ $item['name'] }}</strong><br>
-                        <small class="text-muted">${{ number_format($item['price'], 0, ',', '.') }}</small>
+                        <small class="text-muted">${{ $item['price'] }}</small>
                     </div>
 
                     <!-- Quantity Input -->
@@ -83,7 +83,8 @@
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
                 <h5 class="fw-bold text-success">
-                    {{ __('cart.total') }}: ${{ number_format(session('cart_total', 0), 0, ',', '.') }}</h5>
+                    {{ __('cart.total') }}: ${{ session('cart_total', 0) }}
+                </h5>
             </div>
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">

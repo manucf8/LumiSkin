@@ -11,19 +11,19 @@
         <div class="row mb-4">
             <div class="col-md-4">
                 <strong>{{ __('orders.order_date') }}:</strong><br>
-                {{ $viewData['order']->getCreatedAt()->format('M d, Y H:i') }}
+                {{ $viewData['order']->getCreatedAt() }}
             </div>
             <div class="col-md-4">
                 <strong>{{ __('orders.delivery_date') }}:</strong><br>
-                {{ $viewData['order']->getDeliveryDate()->format('M d, Y') }}
+                {{ $viewData['order']->getDeliveryDate() }}
             </div>
             <div class="col-md-4 text-uppercase">
-                <strong>{{ __('orders.total') }}: ${{ number_format($viewData['order']->getTotal(), 0, ',', '.') }}</strong>
+                <strong>{{ __('orders.total') }}: ${{ $viewData['order']->getTotal() }}</strong>
             </div>
         </div>
         <div class="col-md-4">
             <strong>{{ __('orders.customer') }}:</strong><br>
-            {{ $viewData['order']->user->name }}
+            {{ $viewData['order']->getCustomerName() }}
         </div>
 
 
@@ -43,8 +43,8 @@
                     <tr>
                         <td>{{ $item->product->getName() }}</td>
                         <td class="text-center">{{ $item->getQuantity() }}</td>
-                        <td class="text-center">${{ number_format($item->getPrice(), 0, ',', '.') }}</td>
-                        <td class="text-center">${{ number_format($item->getSubtotal(), 0, ',', '.') }}</td>
+                        <td class="text-center">${{ $item->getPrice() }}</td>
+                        <td class="text-center">${{ $item->getSubtotal() }}</td>
                     </tr>
                     @endforeach
                 </tbody>
