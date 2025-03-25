@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Juan Jose Restrepo Hernandez
+ */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;

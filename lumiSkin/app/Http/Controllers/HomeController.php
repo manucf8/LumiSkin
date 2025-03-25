@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Juan Pablo Zuluaga Pelaez
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Product;

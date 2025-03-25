@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Author:
+ * - Juan Pablo Zuluaga Pelaez
+ * - Manuela Castaño Franco
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -47,7 +53,7 @@ class ProductController extends Controller
         }
 
         $category = Category::findOrFail($categoryId);
-        $products = $category->products()->paginate(10);
+        $products = $category->products()->get();
 
         $viewData = [];
         $viewData['title'] = __('products.list');

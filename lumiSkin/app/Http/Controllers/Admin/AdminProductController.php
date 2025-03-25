@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Author:
+ * - Sara Valentina Cortes Manrique 
+ * - Juan Jose Restrepo Hernandez
+ * - Manuela Castaño Franco
+ */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Contracts\FileStorageInterface;
