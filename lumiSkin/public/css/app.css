@@ -14,8 +14,9 @@ body {
 
 .navbar-brand {
     font-weight: bold;
-    color: #edceb5;
+    color: #daa173;
     font-size: 1.8rem;
+    text-transform: uppercase;
 }
 
 .nav-link {
