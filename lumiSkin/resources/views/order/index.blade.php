@@ -10,32 +10,32 @@
 
         <div class="row mb-4">
             <div class="col-md-4">
-                <strong>Order Date:</strong><br>
-                {{ $viewData['order']->getCreatedAt()->format('M d, Y H:i') }}
+                <strong>{{ __('orders.order_date') }}:</strong><br>
+                {{ $viewData['order']->getCreatedAt() }}
             </div>
             <div class="col-md-4">
-                <strong>Delivery Date:</strong><br>
-                {{ $viewData['order']->getDeliveryDate()->format('M d, Y') }}
+                <strong>{{ __('orders.delivery_date') }}:</strong><br>
+                {{ $viewData['order']->getDeliveryDate() }}
             </div>
             <div class="col-md-4 text-uppercase">
-                <strong>Total: ${{ number_format($viewData['order']->getTotal(), 0, ',', '.') }}</strong>
+                <strong>{{ __('orders.total') }}: ${{ $viewData['order']->getTotal() }}</strong>
             </div>
         </div>
         <div class="col-md-4">
-            <strong>Customer:</strong><br>
-            {{ $viewData['order']->user->name }}
+            <strong>{{ __('orders.customer') }}:</strong><br>
+            {{ $viewData['order']->getCustomerName() }}
         </div>
 
 
-        <h4 class="mt-4 mb-3 fw-bold">Purchased Products</h4>
+        <h4 class="mt-4 mb-3 fw-bold">{{ __('orders.products') }}</h4>
         <div class="table-responsive">
             <table class="table table-striped table-hover align-middle">
                 <thead class="table-light">
                     <tr>
                         <th>Product</th>
-                        <th class="text-center">Quantity</th>
-                        <th class="text-center">Unit Price</th>
-                        <th class="text-center">Subtotal</th>
+                        <th class="text-center">{{ __('orders.quantity') }}</th>
+                        <th class="text-center">{{ __('orders.unit_price') }}</th>
+                        <th class="text-center">{{ __('orders.subtotal') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,8 +43,8 @@
                     <tr>
                         <td>{{ $item->product->getName() }}</td>
                         <td class="text-center">{{ $item->getQuantity() }}</td>
-                        <td class="text-center">${{ number_format($item->getPrice(), 0, ',', '.') }}</td>
-                        <td class="text-center">${{ number_format($item->getSubtotal(), 0, ',', '.') }}</td>
+                        <td class="text-center">${{ $item->getPrice() }}</td>
+                        <td class="text-center">${{ $item->getSubtotal() }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -53,9 +53,9 @@
 
         <div class="text-center mt-4">
             <a href="{{ route('order.pdf', ['id' => $viewData['order']->getId()]) }}" class="btn btn-outline-primary">
-                Download PDF
+                {{ __('orders.pdf') }}
             </a>
-            <a href="/" class="btn btn-outline-primary">← Back to Store</a>
+            <a href="/" class="btn btn-outline-primary">{{ __('app.back') }}</a>
         </div>
     </div>
 </div>

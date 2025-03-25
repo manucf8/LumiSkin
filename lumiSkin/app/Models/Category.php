@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -43,7 +44,7 @@ class Category extends Model
 
     public function getDescription(): string
     {
-        return $this->attributes['description'];
+        return Str::limit($this->attributes['description'], 90);
     }
 
     public function setDescription($description): void

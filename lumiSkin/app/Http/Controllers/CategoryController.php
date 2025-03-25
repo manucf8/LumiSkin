@@ -22,7 +22,7 @@ class CategoryController extends Controller
         $viewData = [];
         $Category = Category::findOrFail($id);
         $viewData['title'] = $Category->getName().' ';
-        $viewData['subtitle'] = $Category->getName().' - Category information';
+        $viewData['subtitle'] = $Category->getName().__('categories.info');
         $viewData['category'] = $Category;
 
         return view('category.show')->with('viewData', $viewData);

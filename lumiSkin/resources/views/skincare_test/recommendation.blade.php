@@ -30,13 +30,13 @@
         <div class="text-center mt-4">
             <a href="{{ route('skincare_test.routine', ['test' => $viewData['test']->id]) }}"
                 class="btn btn-outline-primary">
-                Generate Skincare Routine
+                {{ __('skincare_test.generate_routine') }}
             </a>
         </div>
         @endif
 
         <div class="text-center mt-3">
-            <a href="{{ route('skincare_test.index') }}" class="btn btn-link">Back to the Test</a>
+            <a href="{{ route('skincare_test.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
         </div>
     </div>
 </div>

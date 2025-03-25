@@ -22,7 +22,7 @@
         <form method="POST" action="{{ route('profile.increaseBalance') }}">
             @csrf
 
-            <input type="hidden" name="amount" value="50000">
+            <input type="hidden" name="amount" value="50">
             <button type="submit" class="btn btn-success mt-2">{{ __('profile.add_balance') }}</button>
 
         </form>
@@ -40,7 +40,7 @@
                 @foreach($viewData['orders'] as $order)
                 <tr>
                     <td>{{ $order->getId() }}</td>
-                    <td>${{ number_format($order->getTotal(), 2) }}</td>
+                    <td>${{ $order->getTotal() }}</td>
                     <td>{{ $order->getCreatedAt() }}</td>
                 </tr>
                 @endforeach

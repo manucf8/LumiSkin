@@ -9,6 +9,7 @@ return [
     'not_received' => 'If you did not receive the email',
     'click_request' => 'click here to request another',
     'login' => 'Login',
+    'logout' => 'Logout',
     'register' => 'Register',
     'remember_me' => 'Remember me',
     'password' => 'Password',

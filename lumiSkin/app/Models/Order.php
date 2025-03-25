@@ -48,9 +48,11 @@ class Order extends Model
         $this->attributes['total'] = $total;
     }
 
-    public function getDeliveryDate(): Carbon
+    public function getDeliveryDate(): string
     {
-        return Carbon::parse($this->attributes['delivery_date'])->startOfDay();
+        return Carbon::parse($this->attributes['delivery_date'])
+            ->startOfDay()
+            ->format('M d, Y');
     }
 
     public function setDeliveryDate(Carbon|string $date): void
@@ -58,9 +60,9 @@ class Order extends Model
         $this->attributes['delivery_date'] = Carbon::parse($date)->toDateString();
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): string
     {
-        return Carbon::parse($this->attributes['created_at']);
+        return Carbon::parse($this->attributes['created_at'])->format('M d, Y H:i');
     }
 
     public function getUpdatedAt(): Carbon
@@ -76,6 +78,11 @@ class Order extends Model
     public function setUserId(int $uId): void
     {
         $this->attributes['user_id'] = $uId;
+    }
+
+    public function getCustomerName(): string
+    {
+        return $this->user->name;
     }
 
     public function user(): BelongsTo

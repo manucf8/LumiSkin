@@ -26,7 +26,7 @@
                 @endforeach
             </div>
 
-            <button type="submit" class="btn btn-light">Submit</button>
+            <button type="submit" class="btn btn-light">{{ __('app.submit') }}</button>
         </form>
     </div>
 </div>
