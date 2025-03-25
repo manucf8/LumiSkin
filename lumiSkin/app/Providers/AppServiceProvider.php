@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            RecommendationServiceInterface::class, 
+            RecommendationServiceInterface::class,
             ChatGPTService::class);
         $this->app->bind(
             \App\Contracts\FileStorageInterface::class,

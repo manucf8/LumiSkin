@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\FileStorageInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Contracts\FileStorageInterface;
+use Illuminate\View\View;
 
 class AdminProductController extends Controller
 {
@@ -19,6 +19,7 @@ class AdminProductController extends Controller
     {
         $this->fileStorage = $fileStorage;
     }
+
     public function index(): View
     {
         $viewData = [];
@@ -57,14 +58,14 @@ class AdminProductController extends Controller
         return back()->with('success', __('products.create_success'));
     }
 
-    public function delete($id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         Product::destroy($id);
 
         return back();
     }
 
-    public function edit($id): View
+    public function edit(int $id): View
     {
         $viewData = [];
         $viewData['title'] = __('admin.edit_products');
@@ -74,7 +75,7 @@ class AdminProductController extends Controller
         return view('admin.product.edit')->with('viewData', $viewData);
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         Product::validate($request);
 
