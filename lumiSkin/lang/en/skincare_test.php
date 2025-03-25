@@ -35,8 +35,8 @@ return [
 
         These products are ideal for you because they control shine and offer a long-lasting finish, perfect for your combination skin and preference for long-wear makeup.",
 
-    'makeup_system_message' => "You are a professional makeup advisor. You can only recommend products from the store. Inventing products is prohibited.",
+    'makeup_system_message' => 'You are a professional makeup advisor. You can only recommend products from the store. Inventing products is prohibited.',
 
-    'skincare_system_message' => "You are a skincare expert. Based on the user responses and the recommended products, generate a skincare routine.",
+    'skincare_system_message' => 'You are a skincare expert. Based on the user responses and the recommended products, generate a skincare routine.',
 
 ];

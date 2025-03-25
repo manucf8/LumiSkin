@@ -145,14 +145,14 @@ class Product extends Model
     {
         $cart = session('cart', []);
 
-        return array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
+        return array_sum(array_map(fn ($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
     }
 
     public static function calculateTotalQuantity(): int
     {
         $cart = session('cart', []);
 
-        return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
+        return array_sum(array_map(fn ($item) => $item['quantity'] ?? 1, $cart));
     }
 
     public static function bestSellers(int $limit = 4): Collection

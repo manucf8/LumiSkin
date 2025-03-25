@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Response;
-
 
 class OrderController extends Controller
 {
@@ -82,6 +81,7 @@ class OrderController extends Controller
         ];
 
         $pdf = Pdf::loadView('order.pdf', ['viewData' => $viewData]);
-        return $pdf->download('order_' . $order->id . '.pdf');
+
+        return $pdf->download('order_'.$order->id.'.pdf');
     }
 }

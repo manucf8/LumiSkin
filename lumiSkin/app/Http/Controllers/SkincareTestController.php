@@ -58,7 +58,7 @@ class SkincareTestController extends Controller
             'skincare_test.routine_prompt',
             [
                 'responses' => json_encode($userResponses),
-                'products' => json_encode($recommendedProducts)
+                'products' => json_encode($recommendedProducts),
             ]
         );
 
