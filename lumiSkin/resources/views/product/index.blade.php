@@ -37,7 +37,7 @@
                 <img src="{{ asset('/storage/'.$product->getImage()) }}" class="card-img-top img-card">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-center text-primary">{{ $product->getName() }}</h5>
-                    <p class="card-text text-muted text-center">{{ Str::limit($product->getDescription(), 60) }}</p>
+                    <p class="card-text text-muted text-center">{{ $product->getDescription() }}</p>
                     <p class="text-center text-muted">Categories: {{ $product->getCategories() }}</p>
                     <p class="text-center text-success fw-bold">
                         $ {{ number_format($product->getPrice(), 0, ',', '.') }}</p>
