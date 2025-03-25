@@ -4,7 +4,7 @@
 
 1. Have [XAMPP](https://www.apachefriends.org/) installed in your computer.
 2. Have [Composer](https://getcomposer.org/download/) installed in your computer.
-3. For the Skincare Test to work, you need to add an OpenAI API Key inside your .env file, like so:
+3. For the Skincare Test to work, you need to add an OpenAI API Key inside your .env file, like this:
    ```
    OPENAI_API_KEY=your_openai_api_key
    ```
@@ -32,12 +32,12 @@ DB_PASSWORD=your_database_password
 ### Dummy Data
 If you wish to see the app's full potential without manually creating hundreds of products, you can use our pre-designed MySQL script.
 - Steps
-1. If you already had data, delete your database and create it again.
-2. Run this command to create the database tables `php artisan migrate`
-3. Open the file `script.sql` which is inside the zip
+1. If you already had data inside the database, besides the tables creation, delete your database and create it again.
+2. Run this command to create the tables `php artisan migrate`
+3. Open the file `db.sql`. This is a SQL script that will generate the dummy data.
 4. In `http://localhost/phpmyadmin/` click on your database, and look for a "SQL" button on the upper part of the page.
-5. Copy and paste the contents of the script, and run it.
-6. Copy all of the images in the zip, and paste them inside the folder public/storage in the project's root directory
+5. In there, copy and paste the contents of the script, and run it.
+6. Copy all of the images in the `images` folder, and paste them inside the folder public/storage in the project's root directory.
 
 ## Running the app
 
