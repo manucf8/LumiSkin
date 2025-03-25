@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
-    use HasFactory;
-
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - contains the item primary key (id)
