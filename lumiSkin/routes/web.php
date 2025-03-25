@@ -58,10 +58,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/profile/increaseBalance', 'increaseBalance')->name('profile.increaseBalance');
     });
     Route::controller(App\Http\Controllers\SkincareTestController::class)->group(function (): void {
-        Route::get('/skincare-test', 'index')->name('skincare_test.index');
-        Route::post('/skincare-test', 'store')->name('skincare_test.store');
-        Route::get('/skincare-recommendation/{test}', 'getRecommendation')->name('skincare_test.recommendation');
-        Route::get('/skincare-test/{test}/routine', 'generateRoutine')->name('skincare_test.routine');
+        Route::get('/skincare-test', 'index')->name('skincareTest.index');
+        Route::post('/skincare-test', 'store')->name('skincareTest.store');
+        Route::get('/skincare-recommendation/{test}', 'getRecommendation')->name('skincareTest.recommendation');
+        Route::get('/skincare-test/{test}/routine', 'generateRoutine')->name('skincareTest.routine');
     });
 });
 

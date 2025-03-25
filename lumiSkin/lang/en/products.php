@@ -24,6 +24,6 @@ return [
     'search' => 'Search',
     'search_products' => 'Search products',
     'search_name' => 'Search by name',
-    'search_category' => 'Or Search by category',
+    'search_category' => 'Or search by category',
     'not_found' => 'No products found.',
 ];

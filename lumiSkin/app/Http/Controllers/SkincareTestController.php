@@ -28,7 +28,7 @@ class SkincareTestController extends Controller
         $questions = json_decode(file_get_contents(public_path('data/questions.json')), true);
         $viewData['questions'] = $questions;
 
-        return view('skincare_test.index')->with('viewData', $viewData);
+        return view('skincareTest.index')->with('viewData', $viewData);
     }
 
     public function getRecommendation(SkincareTest $test): View
@@ -46,7 +46,7 @@ class SkincareTestController extends Controller
             'test' => $test,
         ];
 
-        return view('skincare_test.recommendation')->with('viewData', $viewData);
+        return view('skincareTest.recommendation')->with('viewData', $viewData);
     }
 
     public function generateRoutine(SkincareTest $test): View
@@ -70,7 +70,7 @@ class SkincareTestController extends Controller
             'routine' => $routineText,
         ];
 
-        return view('skincare_test.routine')->with('viewData', $viewData);
+        return view('skincareTest.routine')->with('viewData', $viewData);
     }
 
     public function store(Request $request): RedirectResponse
@@ -113,6 +113,6 @@ class SkincareTestController extends Controller
             $explanation = trim($explanation);
         }
 
-        return redirect()->route('skincare_test.recommendation', ['test' => $test->getId()])->with('explanation', $explanation);
+        return redirect()->route('skincareTest.recommendation', ['test' => $test->getId()])->with('explanation', $explanation);
     }
 }

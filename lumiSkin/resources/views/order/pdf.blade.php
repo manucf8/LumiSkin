@@ -63,19 +63,19 @@
         <h1>{{ $viewData['title'] }}</h1>
         <h2>{{ $viewData['subtitle'] }}</h2>
 
-        <p><strong>Order Date:</strong> {{ $viewData['order']->getCreatedAt() }}</p>
-        <p><strong>Delivery Date:</strong> {{ $viewData['order']->getDeliveryDate() }}</p>
-        <p><strong>Customer:</strong> {{ $viewData['order']->getCustomerName() }}</p>
+        <p><strong>{{ __('orders.order_date') }}:</strong> {{ $viewData['order']->getCreatedAt() }}</p>
+        <p><strong>{{ __('orders.delivery_date') }}:</strong> {{ $viewData['order']->getDeliveryDate() }}</p>
+        <p><strong>{{ __('orders.customer') }}:</strong> {{ $viewData['order']->getCustomerName() }}</p>
 
-        <h3 class="mt-4">Products</h3>
+        <h3 class="mt-4">{{ __('orders.products') }}</h3>
 
         <table>
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Unit Price</th>
-                    <th>Subtotal</th>
+                    <th>{{ __('orders.product') }}</th>
+                    <th>{{ __('orders.quantity') }}</th>
+                    <th>{{ __('orders.unit_price') }}</th>
+                    <th>{{ __('orders.subtotal') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,7 +90,7 @@
             </tbody>
         </table>
 
-        <p class="total">Total: ${{ $viewData['order']->getTotal() }}</p>
+        <p class="total">{{ __('orders.total') }}: ${{ $viewData['order']->getTotal() }}</p>
     </div>
 </body>
 

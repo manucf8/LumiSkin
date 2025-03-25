@@ -11,6 +11,13 @@
 </head>
 
 <body>
+    @if($errors->any())
+    <ul class="alert alert-danger list-unstyled">
+      @foreach($errors->all() as $error)
+      <li>- {{ $error }}</li>
+      @endforeach
+    </ul>
+    @endif
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
@@ -22,7 +29,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">{{ __('app.home') }}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('product.index') }}">{{ __('app.products') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('skincare_test.index') }}">{{ __('app.skincare_test') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('skincareTest.index') }}">{{ __('app.skincare_test') }}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">{{ __('app.profile') }}</a></li>
 
                     @guest

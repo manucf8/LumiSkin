@@ -41,7 +41,7 @@
 <div class="test-skincare text-center py-5 mt-5">
     <h2 class="fw-bold">{{ __('skincare_test.find_best') }}</h2>
     <p>{{ __('skincare_test.take_test') }}</p>
-    <a href="{{ route('skincare_test.index') }}" class="btn btn-light">{{ __('skincare_test.take_test_now') }}</a>
+    <a href="{{ route('skincareTest.index') }}" class="btn btn-light">{{ __('skincare_test.take_test_now') }}</a>
 </div>
 
 <!-- Best Sellers -->

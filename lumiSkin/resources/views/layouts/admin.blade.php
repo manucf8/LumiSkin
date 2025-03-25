@@ -14,7 +14,7 @@
 <body>
   <div class="row g-0">
     <!-- sidebar -->
-    <div class="p-3 col fixed text-white bg-dark">
+    <div class="p-3 col-md-3 col-lg-2 bg-dark text-white">
       <a href="{{ route('admin.home.index') }}" class="text-white text-decoration-none">
         <span class="fs-4">{{ __('admin.panel') }}</span>
       </a>
@@ -29,10 +29,9 @@
       </ul>
     </div>
     <!-- sidebar -->
-    <div class="col content-grey">
+    <div class="col-md-9 col-lg-10 content-grey">
       <nav class="p-3 shadow text-end">
         <span class="profile-font">{{ __('admin.admin') }}</span>
-        <img class="img-profile rounded-circle" src="{{ asset('/img/undraw_profile.svg') }}">
       </nav>
 
       <div class="g-0 m-5">

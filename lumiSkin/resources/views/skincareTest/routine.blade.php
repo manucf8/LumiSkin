@@ -11,7 +11,7 @@
         <p class="text-justify">{{ $viewData['routine'] }}</p>
 
         <div class="text-center mt-4">
-            <a href="{{ route('skincare_test.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
+            <a href="{{ route('skincareTest.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
         </div>
     </div>
 </div>

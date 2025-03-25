@@ -8,7 +8,7 @@
         <h1>{{ $viewData['title'] }}</h1>
         <h2>{{ $viewData['subtitle'] }}</h2>
 
-        <form action="{{ route('skincare_test.store') }}" method="POST" class="mt-4">
+        <form action="{{ route('skincareTest.store') }}" method="POST" class="mt-4">
             @csrf
 
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
