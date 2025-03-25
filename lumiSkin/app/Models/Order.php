@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 
 class Order extends Model
 {
-    use HasFactory;
-
     /**
      * ORDER ATTRIBUTES
      * $this->attributes['id'] - int - contains the order primary key (id)
