@@ -1,0 +1,32 @@
+[
+    {
+      "question": "What type of skin do you have?",
+      "name": "skin_type",
+      "options": ["Oily", "Combination", "Dry", "Normal", "Sensitive"]
+    },
+    {
+      "question": "How often do you wear makeup?",
+      "name": "makeup_frequency",
+      "options": ["Daily", "Occasionally", "Rarely", "Never"]
+    },
+    {
+      "question": "Do you have any known allergies?",
+      "name": "allergy",
+      "options": ["Yes", "No", "Not sure"]
+    },
+    {
+      "question": "What finish do you prefer in your foundation?",
+      "name": "foundation_finish",
+      "options": ["Matte", "Natural", "Glow / Luminous"]
+    },
+    {
+      "question": "Do you prefer cruelty-free products?",
+      "name": "cruelty_free",
+      "options": ["Yes", "No", "I don't care"]
+    },
+    {
+      "question": "What level of coverage do you prefer?",
+      "name": "coverage_level",
+      "options": ["Light", "Medium", "Full"]
+    }
+]

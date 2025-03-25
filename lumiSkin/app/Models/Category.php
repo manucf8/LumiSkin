@@ -1,10 +1,18 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -17,7 +25,7 @@ class Category extends Model
      * $this->attributes['updated_at'] - timestamp - contains the category update date
      * $this->products - Product[] - contains the associated products
      */
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -35,24 +43,24 @@ class Category extends Model
         return $this->attributes['name'];
     }
 
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->attributes['name'] = $name;
     }
 
     public function getDescription(): string
     {
-        return $this->attributes['description'];
+        return Str::limit($this->attributes['description'], 90);
     }
 
-    public function setDescription($description): void
+    public function setDescription(string $description): void
     {
         $this->attributes['description'] = $description;
     }
 
     public function getCreatedAt(): string
     {
-        return $this->attributes['created_at'];
+        return Carbon::parse($this->attributes['created_at'])->format('F j, Y');
     }
 
     public function getUpdatedAt(): string
@@ -62,12 +70,11 @@ class Category extends Model
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'category_product');
     }
 
     public function getProducts(): Collection
     {
         return $this->products;
     }
-
 }
