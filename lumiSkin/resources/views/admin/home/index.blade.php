@@ -1,3 +1,5 @@
+{{-- Author: Juan Jose Restrepo Hernandez  --}}
+
 @extends('layouts.admin')
 @section('title', $viewData["title"])
 @section('content')

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Authors:
+ * - Juan Jose Restrepo Hernandez
+ * - Juan Pablo Zuluaga Pelaez
+ * - Manuela Castaño Franco 
+ * - Sara Valentina Cortes Manrique
+ */
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

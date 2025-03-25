@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 return [
     'list' => 'List of all products',
     'discover' => 'Discover our collection',

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Author:
+ * Authors:
  * - Sara Valentina Cortes Manrique 
  * - Juan Jose Restrepo Hernandez
  * - Manuela Castaño Franco

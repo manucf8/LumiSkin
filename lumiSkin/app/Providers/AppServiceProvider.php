@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Authors:
+ * - Sara Valentina Cortes Manrique 
+ * - Manuela Castaño Franco
+ */
+
 namespace App\Providers;
 
 use App\Contracts\RecommendationServiceInterface;

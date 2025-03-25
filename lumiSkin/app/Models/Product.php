@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Juan Pablo Zuluaga Pelaez
+ */
+
 namespace App\Models;
 
 use Carbon\Carbon;

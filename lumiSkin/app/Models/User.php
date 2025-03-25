@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Authors:
+ * - Juan Jose Restrepo Hernandez
+ * - Manuela Castaño Franco
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

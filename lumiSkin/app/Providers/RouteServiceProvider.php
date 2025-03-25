@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Sara Valentina Cortes Manrique 
+ */
+
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;

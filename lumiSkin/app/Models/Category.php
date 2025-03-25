@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 namespace App\Models;
 
 use Carbon\Carbon;

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Juan Jose Restrepo Hernandez
+ */
+
 namespace App\Http\Middleware;
 
 use Closure;

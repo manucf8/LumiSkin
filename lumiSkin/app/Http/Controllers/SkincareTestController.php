@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Sara Valentina Cortes Manrique 
+ */
+
 namespace App\Http\Controllers;
 
 use App\Contracts\RecommendationServiceInterface;

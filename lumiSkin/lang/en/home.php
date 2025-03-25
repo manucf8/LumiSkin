@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 return [
     'title' => 'Home',
     'welcome' => 'Welcome to LumiSkin',

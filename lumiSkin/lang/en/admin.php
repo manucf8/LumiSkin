@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 return [
     'admin' => 'Admin',
     'welcome' => 'Welcome to the Admin Panel, use the sidebar to navigate between the different options.',

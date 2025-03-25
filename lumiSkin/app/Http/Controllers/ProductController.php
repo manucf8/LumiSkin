@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Author:
+ * Authors:
  * - Juan Pablo Zuluaga Pelaez
  * - Manuela Castaño Franco
  */

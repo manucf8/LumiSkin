@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 return [
     'all' => 'All Categories',
     'list' => 'List of all categories',

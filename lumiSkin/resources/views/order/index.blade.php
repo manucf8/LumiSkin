@@ -1,3 +1,5 @@
+{{-- Author: Juan Pablo Zuluaga Pelaez  --}}
+
 @extends('layouts.app')
 
 @section('title', $viewData['title'])

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Author:
+ * - Manuela Castaño Franco 
+ */
+
 return [
     'title' => 'Skincare Recommendation Test',
     'form' => 'Fill out the form to get your personalized skincare recommendation',

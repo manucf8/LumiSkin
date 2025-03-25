@@ -1,3 +1,5 @@
+{{-- Author: Manuela Castaño Franco --}}
+
 @extends('layouts.admin')
 @section('title', $viewData["title"])
 @section('content')

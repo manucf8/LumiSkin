@@ -1,3 +1,5 @@
+{{-- Author: Sara Valentina Cortes Manrique   --}}
+
 @extends('layouts.app')
 
 @section('title', $viewData['title'])
