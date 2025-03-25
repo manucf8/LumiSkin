@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// shop routes
 Route::controller(App\Http\Controllers\HomeController::class)->group(function (): void {
     Route::get('/', 'index')->name('home.index');
 });
@@ -33,28 +33,23 @@ Route::controller(App\Http\Controllers\OrderController::class)->group(function (
     Route::get('/orders/{id}', 'index')->name('orders.index');
 });
 
-// Admin routes
-Route::controller(App\Http\Controllers\Admin\AdminHomeController::class)->group(function (): void {
-    Route::get('/admin', 'index')->name('admin.home.index');
+Route::middleware('admin')->group(function (): void {
+    Route::controller(App\Http\Controllers\Admin\AdminHomeController::class)->group(function (): void {
+        Route::get('/admin', 'index')->name('admin.home.index');
+    });
+
+    Route::controller(App\Http\Controllers\Admin\AdminProductController::class)->group(function (): void {
+        Route::get('/admin/products', 'index')->name('admin.product.index');
+        Route::post('/admin/products/store', 'store')->name('admin.product.store');
+        Route::delete('/admin/products/{id}/delete', 'delete')->name('admin.product.delete');
+        Route::get('/admin/products/{id}/edit', 'edit')->name('admin.product.edit');
+        Route::put('/admin/products/{id}/update', 'update')->name('admin.product.update');
+    });
 });
 
-Route::controller(App\Http\Controllers\Admin\AdminProductController::class)->group(function (): void {
-    Route::get('/admin/products', 'index')->name('admin.product.index');
-    Route::post('/admin/products/store', 'store')->name('admin.product.store');
-    Route::delete('/admin/products/{id}/delete', 'delete')->name('admin.product.delete');
-    Route::get('/admin/products/{id}/edit', 'edit')->name('admin.product.edit');
-    Route::put('/admin/products/{id}/update', 'update')->name('admin.product.update');
+Route::controller(App\Http\Controllers\SkincareTestController::class)->group(function (): void {
+    Route::get('/skincare-test', 'index')->name('skincare_test.index');
+    Route::post('/skincare-test', 'getRecommendation')->name('skincare_test.recommendation');    
 });
-
-/*
-Route::middleware('admin')->group(function () {
-    Route::get('/admin', 'App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
-    Route::get('/admin/products', 'App\Http\Controllers\Admin\AdminProductController@index')->name("admin.product.index");
-    Route::post('/admin/products/store', 'App\Http\Controllers\Admin\AdminProductController@store')->name("admin.product.store");
-    Route::delete('/admin/products/{id}/delete', 'App\Http\Controllers\Admin\AdminProductController@delete')->name("admin.product.delete");
-    Route::get('/admin/products/{id}/edit', 'App\Http\Controllers\Admin\AdminProductController@edit')->name("admin.product.edit");
-    Route::put('/admin/products/{id}/update', 'App\Http\Controllers\Admin\AdminProductController@update')->name("admin.product.update");
-});
-*/
 
 Auth::routes();

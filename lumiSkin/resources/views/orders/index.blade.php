@@ -21,6 +21,11 @@
                 <strong>Total: ${{ number_format($viewData['order']->getTotal(), 0, ',', '.') }}</strong>
             </div>
         </div>
+        <div class="col-md-4">
+            <strong>Customer:</strong><br>
+            {{ $viewData['order']->user->name }}
+        </div>
+
 
         <h4 class="mt-4 mb-3 fw-bold">Purchased Products</h4>
         <div class="table-responsive">
