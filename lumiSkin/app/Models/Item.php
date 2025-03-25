@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
 
 class Item extends Model
 {
@@ -24,7 +25,7 @@ class Item extends Model
      */
     protected $fillable = ['quantity', 'subtotal', 'price', 'product_id', 'order_id'];
 
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'quantity' => 'required|int|min:1',
@@ -85,9 +86,9 @@ class Item extends Model
         return $this->attributes['product_id'];
     }
 
-    public function setProductId(int $pId): void
+    public function setProductId(int $productID): void
     {
-        $this->attributes['product_id'] = $pId;
+        $this->attributes['product_id'] = $productID;
     }
 
     public function product(): BelongsTo
@@ -100,9 +101,9 @@ class Item extends Model
         return $this->attributes['order_id'];
     }
 
-    public function setOrderId(int $oId): void
+    public function setOrderId(int $orderID): void
     {
-        $this->attributes['order_id'] = $oId;
+        $this->attributes['order_id'] = $orderID;
     }
 
     public function order(): BelongsTo

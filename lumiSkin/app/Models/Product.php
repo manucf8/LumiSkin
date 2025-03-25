@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -28,7 +29,7 @@ class Product extends Model
      */
     protected $fillable = ['name', 'description', 'image', 'brand', 'price'];
 
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'name' => 'required|string|max:100',
@@ -117,7 +118,6 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'category_product');
     }
 
-    // Relationship Items
     public function getItems(): Collection
     {
         return $this->items;
@@ -128,7 +128,6 @@ class Product extends Model
         return $this->hasMany(Item::class);
     }
 
-    // Relationship skincare test
     public function getSkincareTests(): Collection
     {
         return $this->skincareTests;

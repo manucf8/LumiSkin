@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\Request;
 
 class SkincareTest extends Model
 {
@@ -19,7 +20,7 @@ class SkincareTest extends Model
      */
     protected $fillable = ['user_id', 'responses'];
 
-    public static function validate($request): void
+    public static function validate(Request $request): void
     {
         $request->validate([
             'responses' => 'required|array',
@@ -58,7 +59,7 @@ class SkincareTest extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function setUser($user): void
+    public function setUser(User $user): void
     {
         $this->user()->associate($user);
     }
