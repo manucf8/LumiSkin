@@ -28,7 +28,7 @@
         @endif
 
         <div class="text-center mt-4">
-            <a href="{{ route('skincare_test.routine', ['test' => $viewData['test']->id]) }}"
+            <a href="{{ route('skincareTest.routine', ['test' => $viewData['test']->id]) }}"
                 class="btn btn-outline-primary">
                 {{ __('skincare_test.generate_routine') }}
             </a>
@@ -36,7 +36,7 @@
         @endif
 
         <div class="text-center mt-3">
-            <a href="{{ route('skincare_test.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
+            <a href="{{ route('skincareTest.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
         </div>
     </div>
 </div>

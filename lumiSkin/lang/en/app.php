@@ -7,7 +7,7 @@ return [
     'delete' => 'Delete',
     'submit' => 'Submit',
     'description' => 'Description',
-    'lumiskin' => 'Lumiskin',
+    'lumiskin' => 'LumiSkin',
     'home' => 'Home',
     'about' => 'About',
     'contact' => 'Contact',

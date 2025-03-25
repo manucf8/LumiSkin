@@ -9,6 +9,7 @@ return [
     'delivery_date' => 'Delivery Date',
     'total' => 'Total',
     'customer' => 'Customer',
+    'product' => 'Product',
     'products' => 'Purchased Products',
     'quantity' => 'Quantity',
     'unit_price' => 'Unit Price',
