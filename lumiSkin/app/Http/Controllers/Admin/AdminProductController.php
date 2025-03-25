@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class AdminProductController extends Controller
@@ -89,7 +88,7 @@ class AdminProductController extends Controller
 
         if ($request->hasFile('image')) {
             $imageName = $product->getId().'.'.$request->file('image')->extension();
-            Storage::disk('public')->put(
+            $this->fileStorage->store(
                 $imageName,
                 file_get_contents($request->file('image')->getRealPath())
             );

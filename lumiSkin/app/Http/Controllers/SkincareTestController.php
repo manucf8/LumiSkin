@@ -83,7 +83,6 @@ class SkincareTestController extends Controller
             abort(403, 'Unauthorized');
         }
         $test->setUser($user);
-        $test->setUser(Auth::user());
         $test->setResponses($request->responses);
         $test->save();
 
