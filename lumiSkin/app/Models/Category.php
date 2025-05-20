@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Manuela Castaño Franco 
+ * - Manuela Castaño Franco
  */
 
 namespace App\Models;
@@ -16,15 +16,20 @@ use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    /**
-     * ATTRIBUTES
-     * $this->attributes['id'] - int - contains the category primary key (id)
-     * $this->attributes['name'] - string - contains the category name
-     * $this->attributes['description'] - string - contains the category description
-     * $this->attributes['created_at'] - timestamp - contains the category creation date
-     * $this->attributes['updated_at'] - timestamp - contains the category update date
-     * $this->products - Product[] - contains the associated products
-     */
+    // ====================================================
+    //                      ATTRIBUTES
+    // ====================================================
+    // $this->attributes['id'] - int - contains the category primary key (id)
+    // $this->attributes['name'] - string - contains the category name
+    // $this->attributes['description'] - string - contains the category description
+    // $this->attributes['created_at'] - timestamp - contains the category creation date
+    // $this->attributes['updated_at'] - timestamp - contains the category update date
+    // $this->products - Product[] - contains the associated products
+
+    // ====================================================
+    //                      VALIDATION
+    // ====================================================
+
     public static function validate(Request $request): void
     {
         $request->validate([
@@ -32,6 +37,10 @@ class Category extends Model
             'description' => 'required',
         ]);
     }
+
+    // ====================================================
+    //                  GETTERS & SETTERS
+    // ====================================================
 
     public function getId(): int
     {
@@ -67,6 +76,14 @@ class Category extends Model
     {
         return $this->attributes['updated_at'];
     }
+
+    // ====================================================
+    //                   RELATIONSHIPS
+    // ====================================================
+
+    // ManyToOne Relationships
+
+    // OneToMany / ManyToMany Relationships
 
     public function products(): BelongsToMany
     {

@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Juan Pablo Zuluaga Pelaez
+ * - Juan Pablo Zuluaga Peláez
  */
 
 namespace App\Models;
@@ -17,21 +17,27 @@ use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    /**
-     * PRODUCT ATTRIBUTES
-     * $this->attributes['id'] - int - contains the product primary key (id)
-     * $this->attributes['name'] - string - contains the product name
-     * $this->attributes['description'] - string - contains the product description
-     * $this->attributes['image'] - string - contains the product image
-     * $this->attributes['brand'] - string - contains the product brand
-     * $this->attributes['price'] - int - contains the product price
-     * $this->attributes['created_at'] - timestamp - contains the product creation date
-     * $this->attributes['updated_at'] - timestamp - contains the product update date
-     *   $this->categories - Category[] - contains the associated categories
-     *   $this->items - Item[] - contains the associated item
-     *   $this->skincareTests - SkincareTest[] - contains the associated Skincare Test 'FALTA'
-     */
+    // ====================================================
+    //                      ATTRIBUTES
+    // ====================================================
+    // $this->attributes['id'] - int - contains the product primary key (id)
+    // $this->attributes['name'] - string - contains the product name
+    // $this->attributes['description'] - string - contains the product description
+    // $this->attributes['image'] - string - contains the product image
+    // $this->attributes['brand'] - string - contains the product brand
+    // $this->attributes['price'] - int - contains the product price
+    // $this->attributes['created_at'] - timestamp - contains the product creation date
+    // $this->attributes['updated_at'] - timestamp - contains the product update date
+    // $this->categories - Category[] - contains the associated categories
+    // $this->items - Item[] - contains the associated items
+    // $this->skincareTests - SkincareTest[] - contains the associated Skincare Tests
+
     protected $fillable = ['name', 'description', 'image', 'brand', 'price'];
+
+
+    // ====================================================
+    //                     VALIDATION
+    // ====================================================
 
     public static function validate(Request $request): void
     {
@@ -45,6 +51,10 @@ class Product extends Model
             'categories.*' => 'exists:categories,id',
         ]);
     }
+
+    // ====================================================
+    //                  GETTERS & SETTERS
+    // ====================================================
 
     public function getId(): int
     {
@@ -111,20 +121,22 @@ class Product extends Model
         return Carbon::parse($this->attributes['updated_at']);
     }
 
-    // Relationship categories
-    public function getCategories(): string
-    {
-        return $this->categories->pluck('name')->join(', ');
-    }
+    // ====================================================
+    //                  RELATIONSHIPS
+    // ====================================================
+
+    // ManyToOne Relationships
+
+    // OneToMany / ManyToMany Relationships
 
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_product');
     }
 
-    public function getItems(): Collection
+    public function getCategories(): string
     {
-        return $this->items;
+        return $this->categories->pluck('name')->join(', ');
     }
 
     public function items(): HasMany
@@ -132,9 +144,9 @@ class Product extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function getSkincareTests(): Collection
+    public function getItems(): Collection
     {
-        return $this->skincareTests;
+        return $this->items;
     }
 
     public function skincareTests(): BelongsToMany
@@ -142,18 +154,27 @@ class Product extends Model
         return $this->belongsToMany(SkincareTest::class, 'product_skincare_test');
     }
 
+    public function getSkincareTests(): Collection
+    {
+        return $this->skincareTests;
+    }
+
+    // ====================================================
+    //          BUSINESS LOGIC / UTILITY METHODS
+    // ====================================================
+
     public static function calculateTotal(): int
     {
         $cart = session('cart', []);
 
-        return array_sum(array_map(fn ($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
+        return array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
     }
 
     public static function calculateTotalQuantity(): int
     {
         $cart = session('cart', []);
 
-        return array_sum(array_map(fn ($item) => $item['quantity'] ?? 1, $cart));
+        return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
     }
 
     public static function bestSellers(int $limit = 4): Collection
@@ -161,7 +182,16 @@ class Product extends Model
         $topProducts = self::select('products.*')
             ->join('items', 'products.id', '=', 'items.product_id')
             ->selectRaw('SUM(items.quantity) as total_sold')
-            ->groupBy('products.id', 'products.name', 'products.description', 'products.price', 'products.brand', 'products.image', 'products.created_at', 'products.updated_at')
+            ->groupBy(
+                'products.id',
+                'products.name',
+                'products.description',
+                'products.price',
+                'products.brand',
+                'products.image',
+                'products.created_at',
+                'products.updated_at'
+            )
             ->orderByDesc('total_sold')
             ->take($limit)
             ->get();
