@@ -47,7 +47,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                            {{ __('app.cart') }} <span class="cart-badge">{{ session('cart_quantity', 0) }}</span>
+                            {{ __('app.cart') }} <span class="cart-badge">{{ \App\Models\Product::calculateTotalQuantity() }}</span>
                         </a>
                     </li>
                 </ul>
@@ -102,8 +102,9 @@
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
                 <h5 class="fw-bold text-success">
-                    {{ __('cart.total') }}: ${{ session('cart_total', 0) }}
+                    {{ __('cart.total') }}: ${{ \App\Models\Product::calculateTotal() }}
                 </h5>
+
             </div>
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">
