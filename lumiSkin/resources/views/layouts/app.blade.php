@@ -15,9 +15,9 @@
 <body>
     @if($errors->any())
     <ul class="alert alert-danger list-unstyled">
-      @foreach($errors->all() as $error)
-      <li>- {{ $error }}</li>
-      @endforeach
+        @foreach($errors->all() as $error)
+        <li>- {{ $error }}</li>
+        @endforeach
     </ul>
     @endif
     <!-- Navbar -->
@@ -65,28 +65,38 @@
         <div class="offcanvas-body">
             @if(session('cart') && count(session('cart')) > 0)
             <ul class="list-group">
-                @foreach(session('cart') as $id => $item)
+                @php
+                $cart = session('cart', []);
+                @endphp
+
+                @forelse ($cart as $id => $quantity)
+                @php
+                $product = App\Models\Product::find($id);
+                @endphp
+
+                @if ($product)
                 <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm border-0 rounded">
                     <div>
-                        <strong class="text-dark">{{ $item['name'] }}</strong><br>
-                        <small class="text-muted">${{ $item['price'] }}</small>
+                        <strong class="text-dark">{{ $product->getName() }}</strong><br>
+                        <small class="text-muted">${{ $product->getPrice() }}</small>
                     </div>
 
-                    <!-- Quantity Input -->
                     <form method="POST" action="{{ route('cart.update', ['id' => $id]) }}" class="cart-update-form">
                         @csrf
-                        <input type="number" name="quantity" value="{{ $item['quantity'] ?? 1 }}" min="1"
+                        <input type="number" name="quantity" value="{{ $quantity }}" min="1"
                             class="form-control form-control-sm text-center w-50 update-quantity"
                             data-id="{{ $id }}">
                     </form>
 
-                    <!-- Remove Button -->
                     <form method="POST" action="{{ route('cart.remove', ['id' => $id]) }}" class="cart-form">
                         @csrf
                         <button class="btn btn-outline-danger btn-sm ms-2">{{ __('app.remove') }}</button>
                     </form>
                 </li>
-                @endforeach
+                @endif
+                @empty
+                <p class="text-center text-muted fs-5">{{ __('cart.empty') }}</p>
+                @endforelse
             </ul>
 
             <!-- Total Amount -->

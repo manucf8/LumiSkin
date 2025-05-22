@@ -166,15 +166,22 @@ class Product extends Model
     public static function calculateTotal(): int
     {
         $cart = session('cart', []);
+        $total = 0;
 
-        return array_sum(array_map(fn($item) => $item['price'] * ($item['quantity'] ?? 1), $cart));
+        foreach ($cart as $id => $quantity) {
+            $product = Product::find($id);
+            if ($product) {
+                $total += $product->getPrice() * $quantity;
+            }
+        }
+
+        return $total;
     }
 
     public static function calculateTotalQuantity(): int
     {
         $cart = session('cart', []);
-
-        return array_sum(array_map(fn($item) => $item['quantity'] ?? 1, $cart));
+        return array_sum($cart);
     }
 
     public static function bestSellers(int $limit = 4): Collection
