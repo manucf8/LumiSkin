@@ -36,24 +36,33 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
+
     public function boot(): void
     {
         Route::aliasMiddleware('admin', AdminAuthMiddleware::class);
 
-        // View Composer global para totales del carrito
         View::composer('*', function ($view) {
             $cart = session('cart', []);
-            $totalQuantity = array_sum($cart);
+            $cartItems = [];
+            $totalQuantity = 0;
             $totalPrice = 0;
 
             foreach ($cart as $id => $quantity) {
                 $product = Product::find($id);
                 if ($product) {
+                    $cartItems[] = [
+                        'id' => $id,
+                        'name' => $product->getName(),
+                        'price' => $product->getPrice(),
+                        'quantity' => $quantity,
+                    ];
+                    $totalQuantity += $quantity;
                     $totalPrice += $product->getPrice() * $quantity;
                 }
             }
 
-            $view->with('cartQuantity', $totalQuantity)
+            $view->with('cartItems', $cartItems)
+                ->with('cartQuantity', $totalQuantity)
                 ->with('cartTotal', $totalPrice);
         });
     }

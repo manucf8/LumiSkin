@@ -20,11 +20,12 @@
         @endforeach
     </ul>
     @endif
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home.index') }}">{{ __('app.lumiskin') }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -39,8 +40,7 @@
                     <a class="nav-link active" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                     @else
                     <form id="logout" action="{{ route('logout') }}" method="POST">
-                        <a role="button" class="nav-link active"
-                            onclick="document.getElementById('logout').submit();">{{ __('auth.logout') }}</a>
+                        <a role="button" class="nav-link active" onclick="document.getElementById('logout').submit();">{{ __('auth.logout') }}</a>
                         @csrf
                     </form>
                     @endguest
@@ -63,37 +63,27 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            @if(session('cart') && count(session('cart')) > 0)
+            @if(count($cartItems) > 0)
             <ul class="list-group">
-                @php
-                $cart = session('cart', []);
-                @endphp
-
-                @forelse ($cart as $id => $quantity)
-                @php
-                $product = App\Models\Product::find($id);
-                @endphp
-
-                @if ($product)
+                @forelse ($cartItems as $item)
                 <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm border-0 rounded">
                     <div>
-                        <strong class="text-dark">{{ $product->getName() }}</strong><br>
-                        <small class="text-muted">${{ $product->getPrice() }}</small>
+                        <strong class="text-dark">{{ $item['name'] }}</strong><br>
+                        <small class="text-muted">${{ $item['price'] }}</small>
                     </div>
 
-                    <form method="POST" action="{{ route('cart.update', ['id' => $id]) }}" class="cart-update-form">
+                    <form method="POST" action="{{ route('cart.update', ['id' => $item['id']]) }}" class="cart-update-form">
                         @csrf
-                        <input type="number" name="quantity" value="{{ $quantity }}" min="1"
+                        <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
                             class="form-control form-control-sm text-center w-50 update-quantity"
-                            data-id="{{ $id }}">
+                            data-id="{{ $item['id'] }}">
                     </form>
 
-                    <form method="POST" action="{{ route('cart.remove', ['id' => $id]) }}" class="cart-form">
+                    <form method="POST" action="{{ route('cart.remove', ['id' => $item['id']]) }}" class="cart-form">
                         @csrf
                         <button class="btn btn-outline-danger btn-sm ms-2">{{ __('app.remove') }}</button>
                     </form>
                 </li>
-                @endif
                 @empty
                 <p class="text-center text-muted fs-5">{{ __('cart.empty') }}</p>
                 @endforelse
@@ -104,13 +94,11 @@
                 <h5 class="fw-bold text-success">
                     {{ __('cart.total') }}: ${{ number_format($cartTotal, 0) }}
                 </h5>
-
             </div>
+
             <!-- Clear Cart and Checkout Buttons -->
             <div class="mt-3 d-flex flex-column gap-2">
-                <!-- Proceed to Checkout Form -->
                 @auth
-                <!-- If the user is authenticated -->
                 <form method="POST" action="{{ route('order.store') }}" class="cart-form">
                     @csrf
                     <label for="delivery_date" class="fw-bold mb-1">{{ __('cart.date') }}:</label>
@@ -120,25 +108,22 @@
                 @endauth
 
                 @guest
-                <!-- If the user is NOT authenticated -->
                 <a href="{{ route('login') }}" class="btn btn-warning w-100 fw-bold"
                     onclick="alert( __('cart.login_alert') )">{{ __('cart.login') }}</a>
                 @endguest
 
-                <!-- Clear Cart Button -->
                 <form method="POST" action="{{ route('cart.clear') }}" class="cart-form">
                     @csrf
                     <button class="btn btn-danger w-100 fw-bold">{{ __('cart.clear') }}</button>
                 </form>
             </div>
-
-
             @else
             <p class="text-center text-muted fs-5">{{ __('cart.empty') }}</p>
             @endif
         </div>
     </div>
     <!-- End of Offcanvas -->
+
     <div class="container my-5" style="padding-top: 80px;">
         @yield('content')
     </div>
