@@ -47,7 +47,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link cart-icon" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-                            {{ __('app.cart') }} <span class="cart-badge">{{ \App\Models\Product::calculateTotalQuantity() }}</span>
+                            {{ __('app.cart') }} <span class="cart-badge">{{ $cartQuantity }}</span>
                         </a>
                     </li>
                 </ul>
@@ -102,7 +102,7 @@
             <!-- Total Amount -->
             <div class="mt-3 p-2 bg-white text-center shadow-sm rounded">
                 <h5 class="fw-bold text-success">
-                    {{ __('cart.total') }}: ${{ \App\Models\Product::calculateTotal() }}
+                    {{ __('cart.total') }}: ${{ number_format($cartTotal, 0) }}
                 </h5>
 
             </div>
