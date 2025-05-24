@@ -44,8 +44,6 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $cart = session('cart', []);
             $cartItems = [];
-            $totalQuantity = 0;
-            $totalPrice = 0;
 
             foreach ($cart as $id => $quantity) {
                 $product = Product::find($id);
@@ -56,14 +54,12 @@ class AppServiceProvider extends ServiceProvider
                         'price' => $product->getPrice(),
                         'quantity' => $quantity,
                     ];
-                    $totalQuantity += $quantity;
-                    $totalPrice += $product->getPrice() * $quantity;
                 }
             }
 
             $view->with('cartItems', $cartItems)
-                ->with('cartQuantity', $totalQuantity)
-                ->with('cartTotal', $totalPrice);
+                ->with('cartQuantity', Product::calculateTotalQuantity())
+                ->with('cartTotal', Product::calculateTotal());
         });
     }
 }
