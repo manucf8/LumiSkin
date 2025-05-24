@@ -16,7 +16,7 @@ return [
     'generate_routine' => 'Generate Skincare routine',
     'recommendations' => 'Product Recommendations',
     'based_on_answers' => 'Based on your answers, here are our product recommendations',
-    'shop_now' => 'shop Now',
+    'shop_now' => 'Shop Now',
     'back' => 'Back to the Test',
     'no_products' => 'No products found',
     'routine_prompt' => "You are a skincare expert. Below are the user's responses to a skincare test: :responses. Additionally, here are the recommended products based on their preferences: :products. Based on this, generate a detailed skincare routine including steps like cleansing, moisturizing, and sunscreen application.",
