@@ -17,7 +17,7 @@
             <ul class="list-group">
                 @foreach ($viewData['recommendedProducts'] as $product)
                 <li class="list-group-item">
-                    <strong>{{ $product->name }}</strong> ({{ $product->brand }}) – {{ $product->description }}
+                    <strong>{{ $product->getName() }}</strong> ({{ $product->getBrand() }}) – {{ $product->getDescription() }}
                 </li>
                 @endforeach
             </ul>
@@ -36,7 +36,12 @@
             </a>
         </div>
         @endif
-
+        <div class="text-center mt-4">
+            <a href="{{ route('product.index') }}"
+                class="btn btn-outline-primary">
+                {{ __('skincare_test.shop_now') }}
+            </a>
+        </div>
         <div class="text-center mt-3">
             <a href="{{ route('skincareTest.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
         </div>

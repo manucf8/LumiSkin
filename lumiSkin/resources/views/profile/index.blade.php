@@ -36,6 +36,7 @@
                     <th>{{ __('orders.order_id') }}</th>
                     <th>{{ __('orders.amount') }}</th>
                     <th>{{ __('orders.date') }}</th>
+                    <th>{{ __('orders.summary') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,11 @@
                     <td>{{ $order->getId() }}</td>
                     <td>${{ $order->getTotal() }}</td>
                     <td>{{ $order->getCreatedAt() }}</td>
+                    <td class="text-center mt-4">
+                        <a href="{{ route('order.index', $order->getId()) }}" class="btn btn-outline-primary">
+                            {{ __('orders.summary') }}
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
