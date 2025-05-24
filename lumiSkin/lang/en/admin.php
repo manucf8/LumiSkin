@@ -11,9 +11,9 @@ return [
     'home' => 'Admin - Home',
     'panel' => 'Admin Panel',
     'categories' => 'Admin - Categories',
-    'edit_categories' => 'Admin Page - Edit Category',
+    'edit_categories' => 'Admin - Edit Category',
     'products' => 'Admin - Products',
-    'edit_products' => 'Admin Page - Edit Product',
+    'edit_products' => 'Admin - Edit Product',
     'back' => 'Go back to the home page',
 
 ];
