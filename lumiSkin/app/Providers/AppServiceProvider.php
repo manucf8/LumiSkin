@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Contracts\FileStorageInterface::class,
             \App\Services\LocalFileStorageService::class
         );
+        
     }
 
     /**
