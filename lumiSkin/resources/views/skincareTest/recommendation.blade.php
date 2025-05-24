@@ -36,7 +36,12 @@
             </a>
         </div>
         @endif
-
+        <div class="text-center mt-4">
+            <a href="{{ route('product.index') }}"
+                class="btn btn-outline-primary">
+                {{ __('skincare_test.shop_now') }}
+            </a>
+        </div>
         <div class="text-center mt-3">
             <a href="{{ route('skincareTest.index') }}" class="btn btn-link">{{ __('skincare_test.back') }}</a>
         </div>

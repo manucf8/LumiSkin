@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Manuela Castaño Franco 
+ * - Manuela Castaño Franco
  */
 
 return [
@@ -16,6 +16,7 @@ return [
     'generate_routine' => 'Generate Skincare routine',
     'recommendations' => 'Product Recommendations',
     'based_on_answers' => 'Based on your answers, here are our product recommendations',
+    'shop_now' => 'shop Now',
     'back' => 'Back to the Test',
     'no_products' => 'No products found',
     'routine_prompt' => "You are a skincare expert. Below are the user's responses to a skincare test: :responses. Additionally, here are the recommended products based on their preferences: :products. Based on this, generate a detailed skincare routine including steps like cleansing, moisturizing, and sunscreen application.",
@@ -23,8 +24,8 @@ return [
     'chatgpt_error' => 'Error connecting to ChatGPT: ',
     'no_response' => 'Could not generate the response.',
 
-    'makeup_recommendation_prompt' => "You are a makeup expert. Below I provide the user's responses: :responses. 
-        Additionally, these are the products available in the store (you cannot invent other products): :products. 
+    'makeup_recommendation_prompt' => "You are a makeup expert. Below I provide the user's responses: :responses.
+        Additionally, these are the products available in the store (you cannot invent other products): :products.
         Your task is to recommend the most suitable products from the list above, based on their skin type, tone, and preferences.
 
         **Important instructions**:
