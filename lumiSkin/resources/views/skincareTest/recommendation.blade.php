@@ -17,7 +17,7 @@
             <ul class="list-group">
                 @foreach ($viewData['recommendedProducts'] as $product)
                 <li class="list-group-item">
-                    <strong>{{ $product->name }}</strong> ({{ $product->brand }}) – {{ $product->description }}
+                    <strong>{{ $product->getName() }}</strong> ({{ $product->getBrand() }}) – {{ $product->getDescription() }}
                 </li>
                 @endforeach
             </ul>
