@@ -58,6 +58,9 @@
         </div>
         @endif
     </div>
+    <div class="d-flex justify-content-center mt-5">
+        {{ $viewData["products"]->appends(request()->query())->links('pagination::bootstrap-5') }}
+    </div>
 </div>
 
 @endsection
