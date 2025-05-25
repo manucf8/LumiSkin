@@ -45,3 +45,6 @@ If you wish to see the app's full potential without manually creating hundreds o
 2. Navigate to the project directory in your terminal.
 3. Run `php artisan serve`
 4. Access the URL that is shown in the terminal. Usually it's localhost, or `http://127.0.0.1:8000`
+
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/manucf8/LumiSkin)
