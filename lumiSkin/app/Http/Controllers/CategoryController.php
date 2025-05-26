@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Manuela Castaño Franco 
+ * - Manuela Castaño Franco
  */
 
 namespace App\Http\Controllers;
@@ -25,10 +25,10 @@ class CategoryController extends Controller
     public function show(int $id): View
     {
         $viewData = [];
-        $Category = Category::findOrFail($id);
-        $viewData['title'] = $Category->getName();
-        $viewData['subtitle'] = $Category->getName().__('categories.info');
-        $viewData['category'] = $Category;
+        $category = Category::findOrFail($id);
+        $viewData['title'] = $category->getName();
+        $viewData['subtitle'] = $category->getName() . __('categories.info');
+        $viewData['category'] = $category;
 
         return view('category.show')->with('viewData', $viewData);
     }

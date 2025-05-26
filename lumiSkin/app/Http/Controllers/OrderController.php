@@ -7,9 +7,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use App\Models\Order;
-use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

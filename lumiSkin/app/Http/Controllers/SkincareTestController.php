@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Sara Valentina Cortes Manrique 
+ * - Sara Valentina Cortes Manrique
  */
 
 namespace App\Http\Controllers;
@@ -38,7 +38,7 @@ class SkincareTestController extends Controller
 
     public function getRecommendation(SkincareTest $test): View
     {
-        $recommendedProducts = $test->recommendations()->get();
+        $recommendedProducts = $test->recommendedProducts()->get();
 
         $explanation = session('explanation');
 
@@ -57,7 +57,7 @@ class SkincareTestController extends Controller
     public function generateRoutine(SkincareTest $test): View
     {
         $userResponses = $test->getResponses();
-        $recommendedProducts = $test->recommendations()->get();
+        $recommendedProducts = $test->recommendedProducts()->get();
 
         $prompt = __(
             'skincare_test.routine_prompt',
@@ -98,7 +98,6 @@ class SkincareTestController extends Controller
 
             $recommendationText = __('skincare_test.no_products_store');
             $explanation = '';
-
         } else {
 
             $recommendationText = $this->recommendationService->getRecommendationFromProducts($userResponses, $products);
@@ -110,7 +109,7 @@ class SkincareTestController extends Controller
             if ($recommendedProducts->isEmpty()) {
                 logger(__('skincare_test.no_products'));
             } else {
-                $test->recommendations()->sync($recommendedProducts->pluck('id'));
+                $test->recommendedProducts()->sync($recommendedProducts->pluck('id'));
             }
 
             $explanation = preg_replace('/- Product name: .+/', '', $recommendationText);

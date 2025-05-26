@@ -22,7 +22,7 @@ class SkincareTest extends Model
     // $this->attributes['created_at'] - timestamp - contains the skincare test creation date
     // $this->attributes['updated_at'] - timestamp - contains the skincare test update date
     // $this->user - User - contains the associated user
-    // $this->recommendations - Product[] - contains the associated products
+    // $this->recommendedProducts - Product[] - contains the associated products
 
     protected $fillable = ['user_id', 'responses'];
 
@@ -86,7 +86,7 @@ class SkincareTest extends Model
 
     // OneToMany / ManyToMany Relationships
 
-    public function recommendations(): BelongsToMany
+    public function recommendedProducts(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'product_skincare_test');
     }
