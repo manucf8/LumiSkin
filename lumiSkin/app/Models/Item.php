@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Juan Pablo Zuluaga Pelaez
+ * - Juan Pablo Zuluaga Peláez
  */
 
 namespace App\Models;
@@ -14,20 +14,25 @@ use Illuminate\Http\Request;
 
 class Item extends Model
 {
-    /**
-     * PRODUCT ATTRIBUTES
-     * $this->attributes['id'] - int - contains the item primary key (id)
-     * $this->attributes['quantity'] - int - contains the quantity of each product
-     * $this->attributes['price'] - int - contains the product price
-     * $this->attributes['subtotal'] - int - contains the subtotal of each item
-     * $this->attributes['created_at'] - timestamp - contains the item creation date
-     * $this->attributes['updated_at'] - timestamp - contains the item update date
-     * $this->attributes['product_id'] - int - contains the referenced product id
-     * $this->attributes['order_id'] - int - contains the referenced order id
-     * $this->product - Product - contains the associated product
-     * $this->order - Order - contains the associated Order
-     */
+    // ====================================================
+    //                      ATTRIBUTES
+    // ====================================================
+    // $this->attributes['id'] - int - contains the item primary key (id)
+    // $this->attributes['quantity'] - int - contains the quantity of each product
+    // $this->attributes['price'] - int - contains the product price
+    // $this->attributes['subtotal'] - int - contains the subtotal of each item
+    // $this->attributes['created_at'] - timestamp - contains the item creation date
+    // $this->attributes['updated_at'] - timestamp - contains the item update date
+    // $this->attributes['product_id'] - int - contains the referenced product id
+    // $this->attributes['order_id'] - int - contains the referenced order id
+    // $this->product - Product - contains the associated product
+    // $this->order - Order - contains the associated order
+
     protected $fillable = ['quantity', 'subtotal', 'price', 'product_id', 'order_id'];
+
+    // ====================================================
+    //                      VALIDATION
+    // ====================================================
 
     public static function validate(Request $request): void
     {
@@ -39,6 +44,10 @@ class Item extends Model
             'order_id' => 'required|exists:orders,id',
         ]);
     }
+
+    // ====================================================
+    //                  GETTERS & SETTERS
+    // ====================================================
 
     public function getId(): int
     {
@@ -95,11 +104,6 @@ class Item extends Model
         $this->attributes['product_id'] = $productID;
     }
 
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
-
     public function getOrderId(): int
     {
         return $this->attributes['order_id'];
@@ -110,8 +114,21 @@ class Item extends Model
         $this->attributes['order_id'] = $orderID;
     }
 
+    // ====================================================
+    //                  RELATIONSHIPS
+    // ====================================================
+
+    // ManyToOne Relationships
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
+
+    // OneToMany / ManyToMany Relationships
 }

@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Sara Valentina Cortes Manrique 
+ * - Sara Valentina Cortes Manrique
  */
 
 namespace App\Services;
@@ -51,7 +51,7 @@ class ChatGPTService implements RecommendationServiceInterface
     private function callChatGPT(string $systemMessage, string $userPrompt): mixed
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer '.$this->apiKey,
+            'Authorization' => 'Bearer ' . $this->apiKey,
             'Content-Type' => 'application/json',
         ])->post($this->apiUrl, [
             'model' => $this->model,
@@ -68,6 +68,6 @@ class ChatGPTService implements RecommendationServiceInterface
             return $data['choices'][0]['message']['content'] ?? __('skincare_test.no_response');
         }
 
-        return __('skincare_test.chatgpt_error').$response->body();
+        return __('skincare_test.chatgpt_error') . $response->body();
     }
 }

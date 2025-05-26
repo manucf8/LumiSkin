@@ -7,7 +7,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -15,22 +14,16 @@ class CartController extends Controller
 {
     public function addToCart(Request $request): RedirectResponse
     {
-        $product = Product::findOrFail($request->id);
+        $productId = $request->id;
         $cart = session()->get('cart', []);
 
-        if (! isset($cart[$product->id])) {
-            $cart[$product->id] = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => 1,
-            ];
+        if (!isset($cart[$productId])) {
+            $cart[$productId] = 1;
         } else {
-            $cart[$product->id]['quantity'] += 1;
+            $cart[$productId]++;
         }
 
         session()->put('cart', $cart);
-        session()->put('cart_total', Product::calculateTotal());
-        session()->put('cart_quantity', Product::calculateTotalQuantity());
 
         return back();
     }
@@ -40,12 +33,9 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
-            $cart[$id]['quantity'] = max(1, (int) $request->quantity);
+            $cart[$id] = max(1, (int) $request->quantity);
             session()->put('cart', $cart);
         }
-
-        session()->put('cart_total', Product::calculateTotal());
-        session()->put('cart_quantity', Product::calculateTotalQuantity());
 
         return back();
     }
@@ -59,17 +49,12 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
 
-        session()->put('cart_total', Product::calculateTotal());
-        session()->put('cart_quantity', Product::calculateTotalQuantity());
-
         return back();
     }
 
     public function clearCart(): RedirectResponse
     {
-        session()->forget('cart');
-        session()->forget('cart_total');
-        session()->forget('cart_quantity');
+        session()->forget('cart'); // ← único dato que necesitas eliminar
 
         return back();
     }

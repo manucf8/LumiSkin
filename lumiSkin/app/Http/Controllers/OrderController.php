@@ -27,7 +27,31 @@ class OrderController extends Controller
             return redirect()->back()->with('error', __('cart.empty'));
         }
 
-        $total = Product::calculateTotal();
+        $total = 0;
+        $itemsData = [];
+
+        foreach ($cart as $productId => $quantity) {
+            $product = \App\Models\Product::find($productId);
+
+            if (!$product) continue;
+
+            $price = $product->getPrice();
+            $subtotal = $price * $quantity;
+
+            $itemsData[] = [
+                'product_id' => $productId,
+                'price' => $price,
+                'quantity' => $quantity,
+                'subtotal' => $subtotal,
+            ];
+
+            $total += $subtotal;
+        }
+
+        if ($total === 0) {
+            return redirect()->back()->with('error', __('cart.empty_or_invalid'));
+        }
+
         $user = Auth::user();
 
         if ($user->balance < $total) {
@@ -36,30 +60,30 @@ class OrderController extends Controller
 
         Order::validate($request);
 
-        $order = Order::create([
-            'user_id' => Auth::id(),
+        $order = \App\Models\Order::create([
+            'user_id' => $user->id,
             'total' => $total,
             'delivery_date' => $request->delivery_date,
         ]);
 
-        foreach ($cart as $productId => $details) {
-            Item::create([
-                'product_id' => $productId,
+        foreach ($itemsData as $item) {
+            \App\Models\Item::create([
+                'product_id' => $item['product_id'],
                 'order_id' => $order->id,
-                'price' => $details['price'],
-                'quantity' => $details['quantity'],
-                'subtotal' => $details['price'] * $details['quantity'],
+                'price' => $item['price'],
+                'quantity' => $item['quantity'],
+                'subtotal' => $item['subtotal'],
             ]);
         }
 
         $user->decreaseBalance($total);
 
         session()->forget('cart');
-        session()->forget('cart_total');
-        session()->forget('cart_quantity');
 
-        return redirect()->route('order.index', $order->id)->with('success', __('orders.create_success'));
+        return redirect()->route('order.index', $order->id)
+            ->with('success', __('orders.create_success'));
     }
+
 
     public function index(int $id): View
     {
@@ -85,6 +109,6 @@ class OrderController extends Controller
 
         $pdf = Pdf::loadView('order.pdf', ['viewData' => $viewData]);
 
-        return $pdf->download('order_'.$order->id.'.pdf');
+        return $pdf->download('order_' . $order->id . '.pdf');
     }
 }

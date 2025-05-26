@@ -28,7 +28,7 @@ class ProductController extends Controller
         $viewData = [];
         $viewData['title'] = __('products.list');
         $viewData['subtitle'] = __('products.discover');
-        $viewData['products'] = $query->get();
+        $viewData['products'] = $query->paginate(10);
         $viewData['categories'] = Category::all();
 
         return view('product.index')->with('viewData', $viewData);

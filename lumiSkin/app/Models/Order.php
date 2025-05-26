@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Juan Pablo Zuluaga Pelaez
+ * - Juan Pablo Zuluaga Peláez
  */
 
 namespace App\Models;
@@ -16,17 +16,23 @@ use Illuminate\Http\Request;
 
 class Order extends Model
 {
-    /**
-     * ORDER ATTRIBUTES
-     * $this->attributes['id'] - int - contains the order primary key (id)
-     * $this->attributes['total'] - int - contains the order total
-     * $this->attributes['delivery_date'] - date - contains the delivery date
-     * $this->attributes['created_at'] - timestamp - contains the order creation date
-     * $this->attributes['updated_at'] - timestamp - contains the order update date
-     * $this->attributes['user_id'] - int - contains the user id
-     * $this->items - Item[] - contains the associated items
-     */
+    // ====================================================
+    //                      ATTRIBUTES
+    // ====================================================
+    // $this->attributes['id'] - int - contains the order primary key (id)
+    // $this->attributes['total'] - int - contains the order total
+    // $this->attributes['delivery_date'] - date - contains the delivery date
+    // $this->attributes['created_at'] - timestamp - contains the order creation date
+    // $this->attributes['updated_at'] - timestamp - contains the order update date
+    // $this->attributes['user_id'] - int - contains the user id
+    // $this->items - Item[] - contains the associated items
+
     protected $fillable = ['user_id', 'total', 'delivery_date'];
+
+
+    // ====================================================
+    //                     VALIDATION
+    // ====================================================
 
     public static function validate(Request $request): void
     {
@@ -34,6 +40,11 @@ class Order extends Model
             'delivery_date' => 'required|date|after:today',
         ]);
     }
+
+
+    // ====================================================
+    //                 GETTERS & SETTERS
+    // ====================================================
 
     public function getId(): int
     {
@@ -87,19 +98,27 @@ class Order extends Model
         return $this->user->name;
     }
 
+    // ====================================================
+    //                     RELATIONSHIPS
+    // ====================================================
+
+    // ManyToOne Relationships
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relationship Items
-    public function getItems(): Collection
-    {
-        return $this->items;
-    }
+
+    // OneToMany / ManyToMany Relationships
 
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
+    }
+
+    public function getItems(): Collection
+    {
+        return $this->items;
     }
 }
