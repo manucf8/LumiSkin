@@ -44,7 +44,7 @@ class Product extends Model
         $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'required|max:255',
-            'image' => 'image|mimes:jpg,jepg,png',
+            'image' => 'nullable|string',
             'brand' => 'required|max:100',
             'price' => 'required|min:1',
             'categories' => 'required|array',
