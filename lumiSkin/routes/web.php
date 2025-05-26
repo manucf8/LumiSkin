@@ -4,7 +4,7 @@
  * Authors:
  * - Juan Jose Restrepo Hernandez
  * - Juan Pablo Zuluaga Pelaez
- * - Manuela Castaño Franco 
+ * - Manuela Castaño Franco
  * - Sara Valentina Cortes Manrique
  */
 
@@ -22,10 +22,10 @@ Route::controller(App\Http\Controllers\ProductController::class)->group(function
 });
 
 Route::controller(App\Http\Controllers\CartController::class)->group(function (): void {
-    Route::post('/cart/add', 'addToCart')->name('cart.add');
-    Route::post('/cart/update/{id}', 'updateCart')->name('cart.update');
-    Route::post('/cart/remove/{id}', 'removeFromCart')->name('cart.remove');
-    Route::post('/cart/clear', 'clearCart')->name('cart.clear');
+    Route::post('/cart/add', 'add')->name('cart.add');
+    Route::post('/cart/update/{id}', 'update')->name('cart.update');
+    Route::post('/cart/remove/{id}', 'remove')->name('cart.remove');
+    Route::post('/cart/clear', 'clear')->name('cart.clear');
 });
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function (): void {

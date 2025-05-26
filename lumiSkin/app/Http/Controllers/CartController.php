@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request): RedirectResponse
+    public function add(Request $request): RedirectResponse
     {
         $productId = $request->id;
         $cart = session()->get('cart', []);
@@ -28,7 +28,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function updateCart(Request $request, int $id): RedirectResponse
+    public function update(Request $request, int $id): RedirectResponse
     {
         $cart = session()->get('cart', []);
 
@@ -40,7 +40,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function removeFromCart(int $id): RedirectResponse
+    public function remove(int $id): RedirectResponse
     {
         $cart = session()->get('cart', []);
 
@@ -52,7 +52,7 @@ class CartController extends Controller
         return back();
     }
 
-    public function clearCart(): RedirectResponse
+    public function clear(): RedirectResponse
     {
         session()->forget('cart'); // ← único dato que necesitas eliminar
 
