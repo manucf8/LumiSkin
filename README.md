@@ -47,3 +47,5 @@ If you wish to see the app's full potential without manually creating hundreds o
 3. Run `php artisan serve`
 4. Access the URL that is shown in the terminal. Usually it's localhost, or `http://127.0.0.1:8000`
 
+## Deployment
+- link: https://www.lumiskinshop.store
