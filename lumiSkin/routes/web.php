@@ -73,4 +73,6 @@ Route::middleware(['auth'])->group(function (): void {
     });
 });
 
+Route::get('/api-products', [App\Http\Controllers\ApiCallController::class, 'showProductsFromApi']);
+
 Auth::routes();
