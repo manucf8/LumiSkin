@@ -94,4 +94,6 @@ class Category extends Model
     {
         return $this->products;
     }
+
+    protected $fillable = ['name', 'description'];
 }
