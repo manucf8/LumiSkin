@@ -2,7 +2,7 @@
 
 /**
  * Author:
- * - Sara Valentina Cortes Manrique 
+ * - Sara Valentina Cortes Manrique
  */
 
 namespace App\Services;
